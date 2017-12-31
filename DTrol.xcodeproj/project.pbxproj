@@ -1,0 +1,732 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B50304781D7B335A001C1D59 /* Hyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B839A21D4567660095F03D /* Hyperlink.m */; };
+		B50304791D7B335A001C1D59 /* ZoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B517A4871D67E608001A1D5B /* ZoneCell.m */; };
+		B503047A1D7B335A001C1D59 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B839761D4565C50095F03D /* AppDelegate.m */; };
+		B503047B1D7B335A001C1D59 /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B839A81D4567660095F03D /* Source.m */; };
+		B503047C1D7B335A001C1D59 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B839791D4565C50095F03D /* MasterViewController.m */; };
+		B503047D1D7B335A001C1D59 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B839731D4565C50095F03D /* main.m */; };
+		B503047E1D7B335A001C1D59 /* LogItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B839B11D4567D50095F03D /* LogItem.m */; };
+		B503047F1D7B335A001C1D59 /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B839B41D45683D0095F03D /* Log.m */; };
+		B50304801D7B335A001C1D59 /* RemoteZoneList.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B839911D4567050095F03D /* RemoteZoneList.m */; };
+		B50304811D7B335A001C1D59 /* RemoteServerList.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B839951D4567050095F03D /* RemoteServerList.m */; };
+		B50304821D7B335A001C1D59 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B8397C1D4565C50095F03D /* DetailViewController.m */; };
+		B50304831D7B335A001C1D59 /* RemoteTuner.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B839A51D4567660095F03D /* RemoteTuner.m */; };
+		B50304841D7B335A001C1D59 /* RemoteComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D91C0D1D4E3C2D0088B162 /* RemoteComponent.m */; };
+		B50304861D7B335A001C1D59 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B839BC1D45802B0095F03D /* SettingsViewController.m */; };
+		B50304881D7B335A001C1D59 /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B839BB1D45802B0095F03D /* LogViewController.m */; };
+		B50304891D7B335A001C1D59 /* RemoteServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B8399C1D45672E0095F03D /* RemoteServer.m */; };
+		B503048A1D7B335A001C1D59 /* RemoteZone.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B8399E1D4567660095F03D /* RemoteZone.m */; };
+		B503048B1D7B335A001C1D59 /* Command.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B839A01D4567660095F03D /* Command.m */; };
+		B503048C1D7B335A001C1D59 /* RemoteTunerList.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B839931D4567050095F03D /* RemoteTunerList.m */; };
+		B503048D1D7B335A001C1D59 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B839AA1D4567660095F03D /* Status.m */; };
+		B503048E1D7B335A001C1D59 /* SettingsList.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B8398F1D4567050095F03D /* SettingsList.m */; };
+		B50304911D7B335A001C1D59 /* log28.png in Resources */ = {isa = PBXBuildFile; fileRef = B5B839B71D457CC60095F03D /* log28.png */; };
+		B50304921D7B335A001C1D59 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5B839831D4565C50095F03D /* LaunchScreen.storyboard */; };
+		B50304931D7B335A001C1D59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B839811D4565C50095F03D /* Assets.xcassets */; };
+		B50304941D7B335A001C1D59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5B8397E1D4565C50095F03D /* Main.storyboard */; };
+		B50304951D7B335A001C1D59 /* bluegear32.edited.png in Resources */ = {isa = PBXBuildFile; fileRef = B5B839B81D457CC60095F03D /* bluegear32.edited.png */; };
+		B50669C31E5FE79C006C368C /* NSString+ResponseString.m in Sources */ = {isa = PBXBuildFile; fileRef = B50669C21E5FE79C006C368C /* NSString+ResponseString.m */; };
+		B5185DEA1E4FB18100492130 /* SourceSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5185DE91E4FB18100492130 /* SourceSettingsViewController.m */; };
+		B5185DED1E4FC73E00492130 /* SourceSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5185DEC1E4FC73E00492130 /* SourceSettingsCell.m */; };
+		B51E31521FB78D570093DA6B /* ServerFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = B51E31511FB78D570093DA6B /* ServerFinder.m */; };
+		B51E31561FB7F8100093DA6B /* ServerSetupController.m in Sources */ = {isa = PBXBuildFile; fileRef = B51E31551FB7F8100093DA6B /* ServerSetupController.m */; };
+		B52A0D251E6928E7007DEFC0 /* ServerConfigHelperAnthemAVM.m in Sources */ = {isa = PBXBuildFile; fileRef = B52A0D241E6928E7007DEFC0 /* ServerConfigHelperAnthemAVM.m */; };
+		B530CCC81E1DFF5400382BC8 /* UserPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = B530CCC71E1DFF5400382BC8 /* UserPreferences.m */; };
+		B53EF4231E56A93300B473C3 /* ZoneSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B53EF4221E56A93300B473C3 /* ZoneSettingsTableViewController.m */; };
+		B55599CA1FC52CA000FE3F7E /* TunerStation.m in Sources */ = {isa = PBXBuildFile; fileRef = B55599C91FC52CA000FE3F7E /* TunerStation.m */; };
+		B55599CD1FC52D7200FE3F7E /* TunerStationAnthemAVM.m in Sources */ = {isa = PBXBuildFile; fileRef = B55599CC1FC52D7200FE3F7E /* TunerStationAnthemAVM.m */; };
+		B58492A11F52377B00294B85 /* README in Resources */ = {isa = PBXBuildFile; fileRef = B584929F1F52377B00294B85 /* README */; };
+		B58492A21F52377B00294B85 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B58492A01F52377B00294B85 /* LICENSE */; };
+		B59083811D7B508100DA474B /* LinkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59083801D7B508100DA474B /* LinkCell.m */; };
+		B59126611FDC5D82005A6569 /* CommandAnthemAVMPresetUp.m in Sources */ = {isa = PBXBuildFile; fileRef = B59126601FDC5D82005A6569 /* CommandAnthemAVMPresetUp.m */; };
+		B59126641FDC8100005A6569 /* CommandAnthemAVMPresetDown.m in Sources */ = {isa = PBXBuildFile; fileRef = B59126631FDC8100005A6569 /* CommandAnthemAVMPresetDown.m */; };
+		B59126671FDC972A005A6569 /* SourceNAD.m in Sources */ = {isa = PBXBuildFile; fileRef = B59126661FDC972A005A6569 /* SourceNAD.m */; };
+		B591F0A31D7DE4BD0048242B /* D.256.png in Resources */ = {isa = PBXBuildFile; fileRef = B591F0A21D7DE4BD0048242B /* D.256.png */; };
+		B5BB229B1E6328DB008FCDDA /* ServerConfigHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BB229A1E6328DB008FCDDA /* ServerConfigHelper.m */; };
+		B5BB229E1E6332F3008FCDDA /* ServerConfigHelperNAD.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BB229D1E6332F3008FCDDA /* ServerConfigHelperNAD.m */; };
+		B5BC17A91FD8DE9900C22742 /* TunerSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BC17A81FD8DE9900C22742 /* TunerSettingsTableViewController.m */; };
+		B5BC17AC1FD8E27600C22742 /* TunerSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BC17AB1FD8E27600C22742 /* TunerSettingsCell.m */; };
+		B5BDB2F41D96E7EA00541EC5 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BDB2F21D96E7EA00541EC5 /* Reachability.m */; };
+		B5BED27B1FBA81BA0084D3FB /* ServerFinderALL.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BED27A1FBA81BA0084D3FB /* ServerFinderALL.m */; };
+		B5BED27E1FBA87DB0084D3FB /* RemoteTunerNAD.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BED27D1FBA87DB0084D3FB /* RemoteTunerNAD.m */; };
+		B5BED2811FBA87F40084D3FB /* RemoteZoneNAD.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BED2801FBA87F40084D3FB /* RemoteZoneNAD.m */; };
+		B5BED2841FBA881E0084D3FB /* RemoteTunerAnthemAVM.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BED2831FBA881E0084D3FB /* RemoteTunerAnthemAVM.m */; };
+		B5BED2871FBA88380084D3FB /* RemoteZoneAnthemAVM.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BED2861FBA88380084D3FB /* RemoteZoneAnthemAVM.m */; };
+		B5D7F9FF1D9DAEB100C7BCD9 /* WiFiWarningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D7F9FE1D9DAEB100C7BCD9 /* WiFiWarningViewController.m */; };
+		B5F14E0C1E58C69F006DA962 /* AddServerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F14E0B1E58C69F006DA962 /* AddServerTableViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B50304991D7B335A001C1D59 /* DTrol.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DTrol.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B50669C11E5FE79C006C368C /* NSString+ResponseString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ResponseString.h"; sourceTree = "<group>"; };
+		B50669C21E5FE79C006C368C /* NSString+ResponseString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ResponseString.m"; sourceTree = "<group>"; };
+		B517A4861D67E608001A1D5B /* ZoneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoneCell.h; sourceTree = "<group>"; };
+		B517A4871D67E608001A1D5B /* ZoneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoneCell.m; sourceTree = "<group>"; };
+		B5185DE81E4FB18100492130 /* SourceSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceSettingsViewController.h; sourceTree = "<group>"; };
+		B5185DE91E4FB18100492130 /* SourceSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceSettingsViewController.m; sourceTree = "<group>"; };
+		B5185DEB1E4FC73E00492130 /* SourceSettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceSettingsCell.h; sourceTree = "<group>"; };
+		B5185DEC1E4FC73E00492130 /* SourceSettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceSettingsCell.m; sourceTree = "<group>"; };
+		B51E31501FB78D560093DA6B /* ServerFinder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServerFinder.h; sourceTree = "<group>"; };
+		B51E31511FB78D570093DA6B /* ServerFinder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServerFinder.m; sourceTree = "<group>"; };
+		B51E31541FB7F8100093DA6B /* ServerSetupController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServerSetupController.h; sourceTree = "<group>"; };
+		B51E31551FB7F8100093DA6B /* ServerSetupController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServerSetupController.m; sourceTree = "<group>"; };
+		B52A0D231E6928E7007DEFC0 /* ServerConfigHelperAnthemAVM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConfigHelperAnthemAVM.h; sourceTree = "<group>"; };
+		B52A0D241E6928E7007DEFC0 /* ServerConfigHelperAnthemAVM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConfigHelperAnthemAVM.m; sourceTree = "<group>"; };
+		B530CCC61E1DFF5400382BC8 /* UserPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPreferences.h; sourceTree = "<group>"; };
+		B530CCC71E1DFF5400382BC8 /* UserPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPreferences.m; sourceTree = "<group>"; };
+		B53EF4211E56A93300B473C3 /* ZoneSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoneSettingsTableViewController.h; sourceTree = "<group>"; };
+		B53EF4221E56A93300B473C3 /* ZoneSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoneSettingsTableViewController.m; sourceTree = "<group>"; };
+		B55599C81FC52CA000FE3F7E /* TunerStation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TunerStation.h; sourceTree = "<group>"; };
+		B55599C91FC52CA000FE3F7E /* TunerStation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TunerStation.m; sourceTree = "<group>"; };
+		B55599CB1FC52D7200FE3F7E /* TunerStationAnthemAVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TunerStationAnthemAVM.h; sourceTree = "<group>"; };
+		B55599CC1FC52D7200FE3F7E /* TunerStationAnthemAVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TunerStationAnthemAVM.m; sourceTree = "<group>"; };
+		B584929F1F52377B00294B85 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		B58492A01F52377B00294B85 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		B590837F1D7B508100DA474B /* LinkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkCell.h; sourceTree = "<group>"; };
+		B59083801D7B508100DA474B /* LinkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkCell.m; sourceTree = "<group>"; };
+		B591265F1FDC5D82005A6569 /* CommandAnthemAVMPresetUp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommandAnthemAVMPresetUp.h; sourceTree = "<group>"; };
+		B59126601FDC5D82005A6569 /* CommandAnthemAVMPresetUp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommandAnthemAVMPresetUp.m; sourceTree = "<group>"; };
+		B59126621FDC8100005A6569 /* CommandAnthemAVMPresetDown.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommandAnthemAVMPresetDown.h; sourceTree = "<group>"; };
+		B59126631FDC8100005A6569 /* CommandAnthemAVMPresetDown.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommandAnthemAVMPresetDown.m; sourceTree = "<group>"; };
+		B59126651FDC972A005A6569 /* SourceNAD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SourceNAD.h; sourceTree = "<group>"; };
+		B59126661FDC972A005A6569 /* SourceNAD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SourceNAD.m; sourceTree = "<group>"; };
+		B591F0A21D7DE4BD0048242B /* D.256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = D.256.png; sourceTree = "<group>"; };
+		B5B839731D4565C50095F03D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B5B839751D4565C50095F03D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B5B839761D4565C50095F03D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B5B839781D4565C50095F03D /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		B5B839791D4565C50095F03D /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		B5B8397B1D4565C50095F03D /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		B5B8397C1D4565C50095F03D /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		B5B8397F1D4565C50095F03D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B5B839811D4565C50095F03D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B5B839841D4565C50095F03D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B5B839861D4565C50095F03D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5B8398F1D4567050095F03D /* SettingsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsList.m; sourceTree = "<group>"; };
+		B5B839901D4567050095F03D /* SettingsList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsList.h; sourceTree = "<group>"; };
+		B5B839911D4567050095F03D /* RemoteZoneList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteZoneList.m; sourceTree = "<group>"; };
+		B5B839921D4567050095F03D /* RemoteZoneList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteZoneList.h; sourceTree = "<group>"; };
+		B5B839931D4567050095F03D /* RemoteTunerList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteTunerList.m; sourceTree = "<group>"; };
+		B5B839941D4567050095F03D /* RemoteTunerList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteTunerList.h; sourceTree = "<group>"; };
+		B5B839951D4567050095F03D /* RemoteServerList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteServerList.m; sourceTree = "<group>"; };
+		B5B839961D4567050095F03D /* RemoteServerList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteServerList.h; sourceTree = "<group>"; };
+		B5B8399B1D45672E0095F03D /* RemoteServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteServer.h; sourceTree = "<group>"; };
+		B5B8399C1D45672E0095F03D /* RemoteServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteServer.m; sourceTree = "<group>"; };
+		B5B8399E1D4567660095F03D /* RemoteZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteZone.m; sourceTree = "<group>"; };
+		B5B8399F1D4567660095F03D /* Command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Command.h; sourceTree = "<group>"; };
+		B5B839A01D4567660095F03D /* Command.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Command.m; sourceTree = "<group>"; };
+		B5B839A11D4567660095F03D /* Hyperlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hyperlink.h; sourceTree = "<group>"; };
+		B5B839A21D4567660095F03D /* Hyperlink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hyperlink.m; sourceTree = "<group>"; };
+		B5B839A41D4567660095F03D /* RemoteTuner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteTuner.h; sourceTree = "<group>"; };
+		B5B839A51D4567660095F03D /* RemoteTuner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteTuner.m; sourceTree = "<group>"; };
+		B5B839A61D4567660095F03D /* RemoteZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteZone.h; sourceTree = "<group>"; };
+		B5B839A71D4567660095F03D /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
+		B5B839A81D4567660095F03D /* Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Source.m; sourceTree = "<group>"; };
+		B5B839A91D4567660095F03D /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
+		B5B839AA1D4567660095F03D /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
+		B5B839B11D4567D50095F03D /* LogItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogItem.m; sourceTree = "<group>"; };
+		B5B839B21D4567D50095F03D /* LogItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogItem.h; sourceTree = "<group>"; };
+		B5B839B41D45683D0095F03D /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
+		B5B839B51D45683D0095F03D /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
+		B5B839B71D457CC60095F03D /* log28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = log28.png; sourceTree = "<group>"; };
+		B5B839B81D457CC60095F03D /* bluegear32.edited.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bluegear32.edited.png; sourceTree = "<group>"; };
+		B5B839BB1D45802B0095F03D /* LogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
+		B5B839BC1D45802B0095F03D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		B5B839BD1D45802B0095F03D /* LogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
+		B5B839BE1D45802B0095F03D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		B5BB22991E6328DB008FCDDA /* ServerConfigHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConfigHelper.h; sourceTree = "<group>"; };
+		B5BB229A1E6328DB008FCDDA /* ServerConfigHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConfigHelper.m; sourceTree = "<group>"; };
+		B5BB229C1E6332F3008FCDDA /* ServerConfigHelperNAD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConfigHelperNAD.h; sourceTree = "<group>"; };
+		B5BB229D1E6332F3008FCDDA /* ServerConfigHelperNAD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConfigHelperNAD.m; sourceTree = "<group>"; };
+		B5BC17A71FD8DE9900C22742 /* TunerSettingsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TunerSettingsTableViewController.h; sourceTree = "<group>"; };
+		B5BC17A81FD8DE9900C22742 /* TunerSettingsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TunerSettingsTableViewController.m; sourceTree = "<group>"; };
+		B5BC17AA1FD8E27600C22742 /* TunerSettingsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TunerSettingsCell.h; sourceTree = "<group>"; };
+		B5BC17AB1FD8E27600C22742 /* TunerSettingsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TunerSettingsCell.m; sourceTree = "<group>"; };
+		B5BDB2F21D96E7EA00541EC5 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		B5BDB2F31D96E7EA00541EC5 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		B5BED2791FBA81BA0084D3FB /* ServerFinderALL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServerFinderALL.h; sourceTree = "<group>"; };
+		B5BED27A1FBA81BA0084D3FB /* ServerFinderALL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServerFinderALL.m; sourceTree = "<group>"; };
+		B5BED27C1FBA87DB0084D3FB /* RemoteTunerNAD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemoteTunerNAD.h; sourceTree = "<group>"; };
+		B5BED27D1FBA87DB0084D3FB /* RemoteTunerNAD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RemoteTunerNAD.m; sourceTree = "<group>"; };
+		B5BED27F1FBA87F40084D3FB /* RemoteZoneNAD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemoteZoneNAD.h; sourceTree = "<group>"; };
+		B5BED2801FBA87F40084D3FB /* RemoteZoneNAD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RemoteZoneNAD.m; sourceTree = "<group>"; };
+		B5BED2821FBA881E0084D3FB /* RemoteTunerAnthemAVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemoteTunerAnthemAVM.h; sourceTree = "<group>"; };
+		B5BED2831FBA881E0084D3FB /* RemoteTunerAnthemAVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RemoteTunerAnthemAVM.m; sourceTree = "<group>"; };
+		B5BED2851FBA88380084D3FB /* RemoteZoneAnthemAVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemoteZoneAnthemAVM.h; sourceTree = "<group>"; };
+		B5BED2861FBA88380084D3FB /* RemoteZoneAnthemAVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RemoteZoneAnthemAVM.m; sourceTree = "<group>"; };
+		B5D7F9FD1D9DAEB100C7BCD9 /* WiFiWarningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiWarningViewController.h; sourceTree = "<group>"; };
+		B5D7F9FE1D9DAEB100C7BCD9 /* WiFiWarningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WiFiWarningViewController.m; sourceTree = "<group>"; };
+		B5D91C0C1D4E3C2D0088B162 /* RemoteComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteComponent.h; sourceTree = "<group>"; };
+		B5D91C0D1D4E3C2D0088B162 /* RemoteComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteComponent.m; sourceTree = "<group>"; };
+		B5F14E0A1E58C69F006DA962 /* AddServerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddServerTableViewController.h; sourceTree = "<group>"; };
+		B5F14E0B1E58C69F006DA962 /* AddServerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddServerTableViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B503048F1D7B335A001C1D59 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B50168631FB8A589006D6082 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				B5BDB2F31D96E7EA00541EC5 /* Reachability.h */,
+				B5BDB2F21D96E7EA00541EC5 /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		B50168641FB8A59D006D6082 /* Server Initialization */ = {
+			isa = PBXGroup;
+			children = (
+				B51E31541FB7F8100093DA6B /* ServerSetupController.h */,
+				B51E31551FB7F8100093DA6B /* ServerSetupController.m */,
+				B51E31501FB78D560093DA6B /* ServerFinder.h */,
+				B51E31511FB78D570093DA6B /* ServerFinder.m */,
+				B5BB22991E6328DB008FCDDA /* ServerConfigHelper.h */,
+				B5BB229A1E6328DB008FCDDA /* ServerConfigHelper.m */,
+			);
+			path = "Server Initialization";
+			sourceTree = "<group>";
+		};
+		B50168651FB8A5E3006D6082 /* Model Objects */ = {
+			isa = PBXGroup;
+			children = (
+				B5F944301FC63F0600F6070A /* Admin */,
+				B5F944331FC640D400F6070A /* Server Interaction */,
+				B5F944341FC6410200F6070A /* Server Interaction Helpers */,
+			);
+			path = "Model Objects";
+			sourceTree = "<group>";
+		};
+		B50168661FB8A5EF006D6082 /* Model Stores */ = {
+			isa = PBXGroup;
+			children = (
+				B5F944311FC6405000F6070A /* Admin */,
+				B5F944321FC640B800F6070A /* Server Interaction */,
+			);
+			path = "Model Stores";
+			sourceTree = "<group>";
+		};
+		B526CC311FC63D2B0090D00A /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B5F9442F1FC63EC500F6070A /* TableView Cells */,
+				B5B839781D4565C50095F03D /* MasterViewController.h */,
+				B5B839791D4565C50095F03D /* MasterViewController.m */,
+				B5B8397B1D4565C50095F03D /* DetailViewController.h */,
+				B5B8397C1D4565C50095F03D /* DetailViewController.m */,
+				B5F14E0A1E58C69F006DA962 /* AddServerTableViewController.h */,
+				B5F14E0B1E58C69F006DA962 /* AddServerTableViewController.m */,
+				B5B839BE1D45802B0095F03D /* SettingsViewController.h */,
+				B5B839BC1D45802B0095F03D /* SettingsViewController.m */,
+				B5B839BD1D45802B0095F03D /* LogViewController.h */,
+				B5B839BB1D45802B0095F03D /* LogViewController.m */,
+				B53EF4211E56A93300B473C3 /* ZoneSettingsTableViewController.h */,
+				B53EF4221E56A93300B473C3 /* ZoneSettingsTableViewController.m */,
+				B5185DE81E4FB18100492130 /* SourceSettingsViewController.h */,
+				B5185DE91E4FB18100492130 /* SourceSettingsViewController.m */,
+				B5BC17A71FD8DE9900C22742 /* TunerSettingsTableViewController.h */,
+				B5BC17A81FD8DE9900C22742 /* TunerSettingsTableViewController.m */,
+				B5D7F9FD1D9DAEB100C7BCD9 /* WiFiWarningViewController.h */,
+				B5D7F9FE1D9DAEB100C7BCD9 /* WiFiWarningViewController.m */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		B5570C5A1FB8A997009747CA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B5B839B71D457CC60095F03D /* log28.png */,
+				B5B839B81D457CC60095F03D /* bluegear32.edited.png */,
+				B591F0A21D7DE4BD0048242B /* D.256.png */,
+				B5B839731D4565C50095F03D /* main.m */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B5B839661D4565C50095F03D = {
+			isa = PBXGroup;
+			children = (
+				B584929F1F52377B00294B85 /* README */,
+				B58492A01F52377B00294B85 /* LICENSE */,
+				B5B839711D4565C50095F03D /* TrollRemoteControl */,
+				B5B839701D4565C50095F03D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B5B839701D4565C50095F03D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B50304991D7B335A001C1D59 /* DTrol.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B5B839711D4565C50095F03D /* TrollRemoteControl */ = {
+			isa = PBXGroup;
+			children = (
+				B5BED2781FBA802F0084D3FB /* Server Customization */,
+				B50168641FB8A59D006D6082 /* Server Initialization */,
+				B50168651FB8A5E3006D6082 /* Model Objects */,
+				B50168661FB8A5EF006D6082 /* Model Stores */,
+				B50168631FB8A589006D6082 /* Reachability */,
+				B526CC311FC63D2B0090D00A /* View Controllers */,
+				B5B839751D4565C50095F03D /* AppDelegate.h */,
+				B5B839761D4565C50095F03D /* AppDelegate.m */,
+				B5B8397E1D4565C50095F03D /* Main.storyboard */,
+				B5B839831D4565C50095F03D /* LaunchScreen.storyboard */,
+				B5B839861D4565C50095F03D /* Info.plist */,
+				B5570C5A1FB8A997009747CA /* Supporting Files */,
+				B5B839811D4565C50095F03D /* Assets.xcassets */,
+			);
+			path = TrollRemoteControl;
+			sourceTree = "<group>";
+		};
+		B5BED2781FBA802F0084D3FB /* Server Customization */ = {
+			isa = PBXGroup;
+			children = (
+				B50669C11E5FE79C006C368C /* NSString+ResponseString.h */,
+				B50669C21E5FE79C006C368C /* NSString+ResponseString.m */,
+				B5BED2791FBA81BA0084D3FB /* ServerFinderALL.h */,
+				B5BED27A1FBA81BA0084D3FB /* ServerFinderALL.m */,
+				B5F944351FC6415C00F6070A /* AnthemAVM */,
+				B5F944361FC6417300F6070A /* NAD */,
+			);
+			path = "Server Customization";
+			sourceTree = "<group>";
+		};
+		B5F9442F1FC63EC500F6070A /* TableView Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B517A4861D67E608001A1D5B /* ZoneCell.h */,
+				B517A4871D67E608001A1D5B /* ZoneCell.m */,
+				B590837F1D7B508100DA474B /* LinkCell.h */,
+				B59083801D7B508100DA474B /* LinkCell.m */,
+				B5185DEB1E4FC73E00492130 /* SourceSettingsCell.h */,
+				B5185DEC1E4FC73E00492130 /* SourceSettingsCell.m */,
+				B5BC17AA1FD8E27600C22742 /* TunerSettingsCell.h */,
+				B5BC17AB1FD8E27600C22742 /* TunerSettingsCell.m */,
+			);
+			path = "TableView Cells";
+			sourceTree = "<group>";
+		};
+		B5F944301FC63F0600F6070A /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				B5B839B21D4567D50095F03D /* LogItem.h */,
+				B5B839B11D4567D50095F03D /* LogItem.m */,
+				B5B839A11D4567660095F03D /* Hyperlink.h */,
+				B5B839A21D4567660095F03D /* Hyperlink.m */,
+				B530CCC61E1DFF5400382BC8 /* UserPreferences.h */,
+				B530CCC71E1DFF5400382BC8 /* UserPreferences.m */,
+			);
+			path = Admin;
+			sourceTree = "<group>";
+		};
+		B5F944311FC6405000F6070A /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				B5B839B51D45683D0095F03D /* Log.h */,
+				B5B839B41D45683D0095F03D /* Log.m */,
+				B5B839901D4567050095F03D /* SettingsList.h */,
+				B5B8398F1D4567050095F03D /* SettingsList.m */,
+			);
+			path = Admin;
+			sourceTree = "<group>";
+		};
+		B5F944321FC640B800F6070A /* Server Interaction */ = {
+			isa = PBXGroup;
+			children = (
+				B5B839961D4567050095F03D /* RemoteServerList.h */,
+				B5B839951D4567050095F03D /* RemoteServerList.m */,
+				B5B839941D4567050095F03D /* RemoteTunerList.h */,
+				B5B839931D4567050095F03D /* RemoteTunerList.m */,
+				B5B839921D4567050095F03D /* RemoteZoneList.h */,
+				B5B839911D4567050095F03D /* RemoteZoneList.m */,
+			);
+			path = "Server Interaction";
+			sourceTree = "<group>";
+		};
+		B5F944331FC640D400F6070A /* Server Interaction */ = {
+			isa = PBXGroup;
+			children = (
+				B5B8399B1D45672E0095F03D /* RemoteServer.h */,
+				B5B8399C1D45672E0095F03D /* RemoteServer.m */,
+				B5D91C0C1D4E3C2D0088B162 /* RemoteComponent.h */,
+				B5D91C0D1D4E3C2D0088B162 /* RemoteComponent.m */,
+				B5B839A41D4567660095F03D /* RemoteTuner.h */,
+				B5B839A51D4567660095F03D /* RemoteTuner.m */,
+				B5B839A61D4567660095F03D /* RemoteZone.h */,
+				B5B8399E1D4567660095F03D /* RemoteZone.m */,
+			);
+			path = "Server Interaction";
+			sourceTree = "<group>";
+		};
+		B5F944341FC6410200F6070A /* Server Interaction Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B5B8399F1D4567660095F03D /* Command.h */,
+				B5B839A01D4567660095F03D /* Command.m */,
+				B5B839A91D4567660095F03D /* Status.h */,
+				B5B839AA1D4567660095F03D /* Status.m */,
+				B5B839A71D4567660095F03D /* Source.h */,
+				B5B839A81D4567660095F03D /* Source.m */,
+				B55599C81FC52CA000FE3F7E /* TunerStation.h */,
+				B55599C91FC52CA000FE3F7E /* TunerStation.m */,
+			);
+			path = "Server Interaction Helpers";
+			sourceTree = "<group>";
+		};
+		B5F944351FC6415C00F6070A /* AnthemAVM */ = {
+			isa = PBXGroup;
+			children = (
+				B52A0D231E6928E7007DEFC0 /* ServerConfigHelperAnthemAVM.h */,
+				B52A0D241E6928E7007DEFC0 /* ServerConfigHelperAnthemAVM.m */,
+				B5BED2821FBA881E0084D3FB /* RemoteTunerAnthemAVM.h */,
+				B5BED2831FBA881E0084D3FB /* RemoteTunerAnthemAVM.m */,
+				B5BED2851FBA88380084D3FB /* RemoteZoneAnthemAVM.h */,
+				B5BED2861FBA88380084D3FB /* RemoteZoneAnthemAVM.m */,
+				B591265F1FDC5D82005A6569 /* CommandAnthemAVMPresetUp.h */,
+				B59126601FDC5D82005A6569 /* CommandAnthemAVMPresetUp.m */,
+				B59126621FDC8100005A6569 /* CommandAnthemAVMPresetDown.h */,
+				B59126631FDC8100005A6569 /* CommandAnthemAVMPresetDown.m */,
+				B55599CB1FC52D7200FE3F7E /* TunerStationAnthemAVM.h */,
+				B55599CC1FC52D7200FE3F7E /* TunerStationAnthemAVM.m */,
+			);
+			path = AnthemAVM;
+			sourceTree = "<group>";
+		};
+		B5F944361FC6417300F6070A /* NAD */ = {
+			isa = PBXGroup;
+			children = (
+				B5BB229C1E6332F3008FCDDA /* ServerConfigHelperNAD.h */,
+				B5BB229D1E6332F3008FCDDA /* ServerConfigHelperNAD.m */,
+				B5BED27C1FBA87DB0084D3FB /* RemoteTunerNAD.h */,
+				B5BED27D1FBA87DB0084D3FB /* RemoteTunerNAD.m */,
+				B5BED27F1FBA87F40084D3FB /* RemoteZoneNAD.h */,
+				B5BED2801FBA87F40084D3FB /* RemoteZoneNAD.m */,
+				B59126651FDC972A005A6569 /* SourceNAD.h */,
+				B59126661FDC972A005A6569 /* SourceNAD.m */,
+			);
+			path = NAD;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B50304761D7B335A001C1D59 /* DTrol */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B50304961D7B335A001C1D59 /* Build configuration list for PBXNativeTarget "DTrol" */;
+			buildPhases = (
+				B50304771D7B335A001C1D59 /* Sources */,
+				B503048F1D7B335A001C1D59 /* Frameworks */,
+				B50304901D7B335A001C1D59 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DTrol;
+			productName = TrollRemoteControl;
+			productReference = B50304991D7B335A001C1D59 /* DTrol.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B5B839671D4565C50095F03D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = "Pete Maiser";
+				TargetAttributes = {
+					B50304761D7B335A001C1D59 = {
+						DevelopmentTeam = 5M3EYN9AZR;
+					};
+				};
+			};
+			buildConfigurationList = B5B8396A1D4565C50095F03D /* Build configuration list for PBXProject "DTrol" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B5B839661D4565C50095F03D;
+			productRefGroup = B5B839701D4565C50095F03D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B50304761D7B335A001C1D59 /* DTrol */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B50304901D7B335A001C1D59 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B50304911D7B335A001C1D59 /* log28.png in Resources */,
+				B591F0A31D7DE4BD0048242B /* D.256.png in Resources */,
+				B58492A21F52377B00294B85 /* LICENSE in Resources */,
+				B50304921D7B335A001C1D59 /* LaunchScreen.storyboard in Resources */,
+				B50304931D7B335A001C1D59 /* Assets.xcassets in Resources */,
+				B50304941D7B335A001C1D59 /* Main.storyboard in Resources */,
+				B50304951D7B335A001C1D59 /* bluegear32.edited.png in Resources */,
+				B58492A11F52377B00294B85 /* README in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B50304771D7B335A001C1D59 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B50304781D7B335A001C1D59 /* Hyperlink.m in Sources */,
+				B50304791D7B335A001C1D59 /* ZoneCell.m in Sources */,
+				B503047A1D7B335A001C1D59 /* AppDelegate.m in Sources */,
+				B59126611FDC5D82005A6569 /* CommandAnthemAVMPresetUp.m in Sources */,
+				B5BC17AC1FD8E27600C22742 /* TunerSettingsCell.m in Sources */,
+				B59126641FDC8100005A6569 /* CommandAnthemAVMPresetDown.m in Sources */,
+				B503047B1D7B335A001C1D59 /* Source.m in Sources */,
+				B5BDB2F41D96E7EA00541EC5 /* Reachability.m in Sources */,
+				B5BB229E1E6332F3008FCDDA /* ServerConfigHelperNAD.m in Sources */,
+				B5BED2871FBA88380084D3FB /* RemoteZoneAnthemAVM.m in Sources */,
+				B51E31561FB7F8100093DA6B /* ServerSetupController.m in Sources */,
+				B503047C1D7B335A001C1D59 /* MasterViewController.m in Sources */,
+				B5F14E0C1E58C69F006DA962 /* AddServerTableViewController.m in Sources */,
+				B503047D1D7B335A001C1D59 /* main.m in Sources */,
+				B5BED2811FBA87F40084D3FB /* RemoteZoneNAD.m in Sources */,
+				B503047E1D7B335A001C1D59 /* LogItem.m in Sources */,
+				B503047F1D7B335A001C1D59 /* Log.m in Sources */,
+				B530CCC81E1DFF5400382BC8 /* UserPreferences.m in Sources */,
+				B55599CD1FC52D7200FE3F7E /* TunerStationAnthemAVM.m in Sources */,
+				B50304801D7B335A001C1D59 /* RemoteZoneList.m in Sources */,
+				B5D7F9FF1D9DAEB100C7BCD9 /* WiFiWarningViewController.m in Sources */,
+				B50304811D7B335A001C1D59 /* RemoteServerList.m in Sources */,
+				B5BED27B1FBA81BA0084D3FB /* ServerFinderALL.m in Sources */,
+				B50304821D7B335A001C1D59 /* DetailViewController.m in Sources */,
+				B53EF4231E56A93300B473C3 /* ZoneSettingsTableViewController.m in Sources */,
+				B59083811D7B508100DA474B /* LinkCell.m in Sources */,
+				B5BED2841FBA881E0084D3FB /* RemoteTunerAnthemAVM.m in Sources */,
+				B50304831D7B335A001C1D59 /* RemoteTuner.m in Sources */,
+				B5BB229B1E6328DB008FCDDA /* ServerConfigHelper.m in Sources */,
+				B50669C31E5FE79C006C368C /* NSString+ResponseString.m in Sources */,
+				B5BC17A91FD8DE9900C22742 /* TunerSettingsTableViewController.m in Sources */,
+				B5185DED1E4FC73E00492130 /* SourceSettingsCell.m in Sources */,
+				B5BED27E1FBA87DB0084D3FB /* RemoteTunerNAD.m in Sources */,
+				B50304841D7B335A001C1D59 /* RemoteComponent.m in Sources */,
+				B50304861D7B335A001C1D59 /* SettingsViewController.m in Sources */,
+				B50304881D7B335A001C1D59 /* LogViewController.m in Sources */,
+				B52A0D251E6928E7007DEFC0 /* ServerConfigHelperAnthemAVM.m in Sources */,
+				B50304891D7B335A001C1D59 /* RemoteServer.m in Sources */,
+				B5185DEA1E4FB18100492130 /* SourceSettingsViewController.m in Sources */,
+				B59126671FDC972A005A6569 /* SourceNAD.m in Sources */,
+				B503048A1D7B335A001C1D59 /* RemoteZone.m in Sources */,
+				B503048B1D7B335A001C1D59 /* Command.m in Sources */,
+				B503048C1D7B335A001C1D59 /* RemoteTunerList.m in Sources */,
+				B503048D1D7B335A001C1D59 /* Status.m in Sources */,
+				B55599CA1FC52CA000FE3F7E /* TunerStation.m in Sources */,
+				B503048E1D7B335A001C1D59 /* SettingsList.m in Sources */,
+				B51E31521FB78D570093DA6B /* ServerFinder.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B5B8397E1D4565C50095F03D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B5B8397F1D4565C50095F03D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B5B839831D4565C50095F03D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B5B839841D4565C50095F03D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B50304971D7B335A001C1D59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "$(SRCROOT)/TrollRemoteControl/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maiser.TrollRemoteControl.D;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B50304981D7B335A001C1D59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "$(SRCROOT)/TrollRemoteControl/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maiser.TrollRemoteControl.D;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B5B839871D4565C50095F03D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B5B839881D4565C50095F03D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B50304961D7B335A001C1D59 /* Build configuration list for PBXNativeTarget "DTrol" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B50304971D7B335A001C1D59 /* Debug */,
+				B50304981D7B335A001C1D59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5B8396A1D4565C50095F03D /* Build configuration list for PBXProject "DTrol" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5B839871D4565C50095F03D /* Debug */,
+				B5B839881D4565C50095F03D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B5B839671D4565C50095F03D /* Project object */;
+}
