@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UserPreferences : NSObject
+@interface UserPreferences : NSObject <NSSecureCoding>
 
 @property BOOL showZoneSetupButtons;
 @property BOOL enableAutoPowerOnTuner;

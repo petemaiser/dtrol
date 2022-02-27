@@ -17,6 +17,7 @@
 #import "RemoteZoneList.h"
 #import "RemoteTunerNAD.h"
 #import "RemoteZoneNAD.h"
+#import "DemoServers.h"
 
 @interface ServerConfigHelperNAD ()
 
@@ -491,22 +492,68 @@
     if ((customizeComponents) &&
         (self.serverSetupController.serverSetupStatus == ServerSetupStatusInnterogationSuccess))
     {
-        // Other Custom Settings (all of these can be changed on Zone Settings View)
+        
+        // The components have been built via interogation, lets fill-in additional demo server details if we have them.
+        // Start by finding the demoServer configuration dictionary
+        NSDictionary *demoServer = nil;
+        DemoServers *ds = [[DemoServers alloc] init];
+        for (NSDictionary *d in ds.list) {
+            
+            NSString *demoIP = [d objectForKey:@"serverIP"];
+            if ([demoIP isEqualToString:self.server.IP]) {
+                demoServer = d;
+                break;
+            }
+            
+        }
+        
+        self.server.customIfString = [demoServer objectForKey:@"customIfString"];
+        self.server.customThenString = [demoServer objectForKey:@"customThenString"];
+        
         if (self.zone1) {
-            self.zone1.nameLong = @"Family Room";
+            self.zone1.nameLong = [demoServer objectForKey:@"zone1.nameLong"];
+            self.zone1.isHidden = [[demoServer objectForKey:@"zone1.isHidden"] boolValue];
+        }
+        if (self.zone2) {
+            self.zone2.nameLong = [demoServer objectForKey:@"zone2.nameLong"];
+            self.zone2.isHidden = [[demoServer objectForKey:@"zone2.isHidden"] boolValue];
         }
         if (self.zone3) {
-            self.zone3.nameLong = @"Deck";
-            self.zone3.customPostPowerOnString = @"Main.Trigger2.Out=Zone3";
-            self.zone3.customPostPowerOffString = @"Main.Trigger2.Out=Main";
-            self.zone3.isDynamicZone = YES;
+            self.zone3.nameLong = [demoServer objectForKey:@"zone3.nameLong"];
+            self.zone3.isHidden = [[demoServer objectForKey:@"zone3.isHidden"] boolValue];
         }
         if (self.zone4) {
-            self.zone4.nameLong = @"Kitch & Living";
-            self.zone4.customPostPowerOnString = @"Main.Trigger3.Out=Zone4";
-            self.zone4.customPostPowerOffString = @"Main.Trigger3.Out=Main";
-            self.zone4.isDynamicZone = YES;
+            self.zone4.nameLong = [demoServer objectForKey:@"zone4.nameLong"];
+            self.zone4.isHidden = [[demoServer objectForKey:@"zone4.isHidden"] boolValue];
         }
+        
+        NSString *tunerOverrideIP = [demoServer objectForKey:@"tunerOverride.IP"];
+        if (![tunerOverrideIP isEqualToString:@""]) {
+            
+            // Disable the local Tuner Source
+            Source *s = self.sourceList[9]; s.enabled = @"N";
+            
+            // Fine the tuner zone
+            NSString *tunerOverrideZoneNameLong = [demoServer objectForKey:@"tunerOverride.zone.nameLong"];
+            RemoteZone *tunerZone =  [self getZoneWithServerIP:tunerOverrideIP andZoneNameLong:tunerOverrideZoneNameLong];
+            
+            // Set the tuner zone as a overide on all of this servers zones
+
+            if (self.zone1) {
+                self.zone1.tunerOverrideZoneUUID = tunerZone.zoneUUID;
+            }
+            if (self.zone2) {
+                self.zone2.tunerOverrideZoneUUID = tunerZone.zoneUUID;
+            }
+            if (self.zone3) {
+                self.zone3.tunerOverrideZoneUUID = tunerZone.zoneUUID;
+            }
+            if (self.zone4) {
+                self.zone4.tunerOverrideZoneUUID = tunerZone.zoneUUID;
+            }
+            
+        }
+        
     }
 
 }

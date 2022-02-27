@@ -41,7 +41,7 @@
 #import <Foundation/Foundation.h>
 @class RemoteServer;
 
-@interface Command : NSObject <NSCopying>
+@interface Command : NSObject <NSCopying, NSSecureCoding>
 
 @property (nonatomic, copy) NSString *variable;                 // The "variable" the processor uses for this command / the root command itself
 @property (nonatomic, copy) NSString *parameter;                // The command parameter value

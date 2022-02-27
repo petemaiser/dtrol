@@ -10,7 +10,7 @@
 @class RemoteTuner;
 @class Source;
 
-@interface RemoteServer : NSObject <NSStreamDelegate>
+@interface RemoteServer : NSObject <NSStreamDelegate, NSSecureCoding>
 
 @property (nonatomic, readonly, strong) NSUUID *serverUUID;
 @property BOOL isConnected;
@@ -34,6 +34,9 @@
 @property (nonatomic) NSString *mainZoneSourceValue;
 @property (nonatomic) NSString *airplaySourceValue;
 - (void)addSource:(Source *)source;
+
+@property (nonatomic) NSString *customIfString;             // Monitor for this string as an "If".  Execute "Then" string when "If" is observed.
+@property (nonatomic) NSString *customThenString;           // Execute "Then" string when "If" is observed.
 
 @property (nonatomic, copy) void (^callbackBlock)(NSString *);
 - (void)addBlockForIncomingStrings:(void (^)(NSString *))callbackBlock;

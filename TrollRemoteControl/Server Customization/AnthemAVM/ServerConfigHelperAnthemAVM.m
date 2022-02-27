@@ -19,6 +19,7 @@
 #import "TunerStationAnthemAVM.h"
 #import "CommandAnthemAVMPresetUp.h"
 #import "CommandAnthemAVMPresetDown.h"
+#import "DemoServers.h"
 
 @interface ServerConfigHelperAnthemAVM ()
 
@@ -461,24 +462,77 @@
     if ((customizeComponents) &&
         (self.serverSetupController.serverSetupStatus == ServerSetupStatusInnterogationSuccess))
     {
-        // Custom Source Settings (all of these can be changed on Zone Settings View)
-        if ([self.sourceList count] >= 17) {
-            Source *s = self.sourceList[0]; s.name = @"MacPro";
-            s = self.sourceList[1];         s.name = @"Fire2 Music";
-            s = self.sourceList[2];         s.name = @"ATV2 Music";
-            s = self.sourceList[3];         s.name = @"Sharp TV";
-            s = self.sourceList[5];         s.name = @"BluRay";
-            s = self.sourceList[6];         s.name = @"Fire2 Video";
-            s = self.sourceList[7];         s.name = @"ATV2 Video";
-            s = self.sourceList[8];         s.name = @"XBOX";
-            s = self.sourceList[9];         s.name = @"Wii";
+        
+        // The components have been built via interogation, lets fill-in additional demo server details if we have them.
+        // Start by finding the demoServer configuration dictionary
+        NSDictionary *demoServer = nil;
+        DemoServers *ds = [[DemoServers alloc] init];
+        for (NSDictionary *d in ds.list) {
+            
+            NSString *demoIP = [d objectForKey:@"serverIP"];
+            if ([demoIP isEqualToString:self.server.IP]) {
+                demoServer = d;
+                break;
+            }
+            
         }
         
-        // Other Custom Settings (all of these can be changed on Zone Settings View)
+        self.server.customIfString = [demoServer objectForKey:@"customIfString"];
+        self.server.customThenString = [demoServer objectForKey:@"customThenString"];
+        
         if (self.zone1) {
-            self.zone1.nameLong = @"Home Theater";
+            self.zone1.nameLong = [demoServer objectForKey:@"zone1.nameLong"];
+            self.zone1.isHidden = [[demoServer objectForKey:@"zone1.isHidden"] boolValue];
         }
+        if (self.zone2) {
+            self.zone2.nameLong = [demoServer objectForKey:@"zone2.nameLong"];
+            self.zone2.isHidden = [[demoServer objectForKey:@"zone2.isHidden"] boolValue];
+        }
+        if (self.zone3) {
+            self.zone3.nameLong = [demoServer objectForKey:@"zone3.nameLong"];
+            self.zone3.isHidden = [[demoServer objectForKey:@"zone3.isHidden"] boolValue];
+        }
+        
+        NSString *tunerOverrideIP = [demoServer objectForKey:@"tunerOverride.IP"];
+        if (![tunerOverrideIP isEqualToString:@""]) {
+            
+            // Disable the local Tuner Source
+            Source *s = self.sourceList[4]; s.enabled = @"N";
+            
+            // Fine the tuner zone
+            NSString *tunerOverrideZoneNameLong = [demoServer objectForKey:@"tunerOverride.zone.nameLong"];
+            RemoteZone *tunerZone =  [self getZoneWithServerIP:tunerOverrideIP andZoneNameLong:tunerOverrideZoneNameLong];
+            
+            // Set the tuner zone as a overide on all of this servers zones
+
+            if (self.zone1) {
+                self.zone1.tunerOverrideZoneUUID = tunerZone.zoneUUID;
+            }
+            if (self.zone2) {
+                self.zone2.tunerOverrideZoneUUID = tunerZone.zoneUUID;
+            }
+            if (self.zone3) {
+                self.zone3.tunerOverrideZoneUUID = tunerZone.zoneUUID;
+            }
+            
+        }
+        
+        // Custom Source Settings (all of these can be changed on Zone Settings View)
+        if ([self.sourceList count] >= 17) {
+            Source *s = self.sourceList[0]; s.name = @"HTPC";
+            s = self.sourceList[1];         s.name = @"XBOX";
+            s = self.sourceList[2];         s.name = @"Wii";
+            s = self.sourceList[3];         s.name = @"Rack Tuner";
+            self.server.tunerSourceValue = s.value;
+            s = self.sourceList[5];         s.name = @"BLURay";
+            s = self.sourceList[6];         s.name = @"TV";
+            s = self.sourceList[7];         s.name = @"TV-Music";
+            s = self.sourceList[8];         s.name = @"Airplay";
+            s = self.sourceList[9];         s.name = @"Echo";
+        }
+        
     }
+       
 }
 
 @end

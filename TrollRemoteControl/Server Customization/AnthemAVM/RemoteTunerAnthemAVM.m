@@ -11,6 +11,7 @@
 #import "RemoteZoneAnthemAVM.h"
 #import "RemoteZoneList.h"
 #import "TunerStation.h"
+#import "Status.h"
 
 @implementation RemoteTunerAnthemAVM
 
@@ -86,9 +87,14 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        _frequencyStatus = [aDecoder decodeObjectForKey:@"frequencyStatus"];
+        _frequencyStatus = [aDecoder decodeObjectOfClass:[Status class] forKey:@"frequencyStatus"];
     }
     return self;
+}
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
 }
 
 @end

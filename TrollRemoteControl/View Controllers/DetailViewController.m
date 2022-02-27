@@ -76,9 +76,20 @@
             [self.dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
         }
         
+        // Set the server
         self.remoteServer = self.remoteZone.server;
-        self.remoteTuner = [[RemoteTunerList sharedList] getTunerWithServerUUID:self.remoteZone.serverUUID];
-
+        
+        // Set the tuner
+        if (self.remoteZone.tunerOverrideZoneUUID) {
+            RemoteZone *tunerOverrideZone = [[RemoteZoneList sharedList] getZoneWithZoneUUID:self.remoteZone.tunerOverrideZoneUUID];
+            self.remoteTuner = [[RemoteTunerList sharedList] getTunerWithServerUUID:tunerOverrideZone.serverUUID];
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(reloadTunerData)
+                                                         name:StreamNewDataNotificationString
+                                                       object:tunerOverrideZone.server];
+        } else {
+            self.remoteTuner = [[RemoteTunerList sharedList] getTunerWithServerUUID:self.remoteZone.serverUUID];
+        }
         
         self.isChangingFromRecordToZone = NO;
         
@@ -134,7 +145,7 @@
         // This would happen at app startup.  There is nothing to show.
         
         self.navigationItem.title = [NSString stringWithFormat:@""];
-        if (self.splitViewController.displayMode == UISplitViewControllerDisplayModeAllVisible ) {
+        if (self.splitViewController.displayMode == UISplitViewControllerDisplayModeOneBesideSecondary ) {
             self.navigationItem.leftBarButtonItem = nil;
         }
         self.navigationItem.rightBarButtonItem = nil;
@@ -300,13 +311,7 @@
 
 -(void)reloadData
 {
-    if (self.remoteTuner) {
-        self.frequencyTextField.text = self.remoteTuner.frequencyText;
-        self.presetTextField.text = self.remoteTuner.presetText;
-    } else {
-        self.frequencyTextField.text = @"";
-        self.presetTextField.text = @"";
-    }
+    [self reloadTunerData];
     
     if (self.remoteZone) {
 
@@ -378,6 +383,17 @@
         
     }
     
+}
+
+-(void)reloadTunerData
+{
+    if (self.remoteTuner) {
+        self.frequencyTextField.text = self.remoteTuner.frequencyText;
+        self.presetTextField.text = self.remoteTuner.presetText;
+    } else {
+        self.frequencyTextField.text = @"";
+        self.presetTextField.text = @"";
+    }
 }
 
 - (void)rebuildVolumeCommands
@@ -522,6 +538,7 @@ numberOfRowsInComponent:(NSInteger)component
 
 - (void)turnPowerOn
 {
+    // Set the power on command
     Command *command = nil;
     if (self.remoteZone.isDynamicZone) {
         
@@ -538,10 +555,19 @@ numberOfRowsInComponent:(NSInteger)component
         command = self.remoteZone.powerOnCommand;
         
     }
+    
+    // Send the power on command
     if (command) {
         [command sendCommandToServer:self.remoteServer withPrefix:self.remoteZone.prefixValue];
     }
     
+    // Process the Tuner Override Zone
+    if (self.remoteZone.tunerOverrideZoneUUID) {
+        RemoteZone *tunerOverrideZone = [[RemoteZoneList sharedList] getZoneWithZoneUUID:self.remoteZone.tunerOverrideZoneUUID];
+        [tunerOverrideZone.powerOnCommand sendCommandToServer:tunerOverrideZone.server withPrefix:tunerOverrideZone.prefixValue];
+    }
+    
+    // Send the custom post-power-on string
     [self.remoteServer sendString:self.remoteZone.customPostPowerOnString];
     if (self.remoteZone.mustRequestStatus) {
         [self.remoteZone  sendRequestForStatus];
@@ -550,6 +576,7 @@ numberOfRowsInComponent:(NSInteger)component
 
 - (void)turnPowerOff
 {
+    // Send the power on command
     if (self.remoteZone.isDynamicZone) {
         
         // The zone is dynamically configured from "record" to "zone"...so to turn it off just change back to "record"
@@ -565,7 +592,6 @@ numberOfRowsInComponent:(NSInteger)component
                 break;
             }
         }
-        
     } else {
         
         // It is normal zone, so just turn it off
@@ -574,6 +600,15 @@ numberOfRowsInComponent:(NSInteger)component
         
     }
     
+    // Process the Tuner Override Zone
+    if (self.remoteZone.tunerOverrideZoneUUID) {
+        if (![self otherZonesUsingOverrideTuner]) {
+            RemoteZone *tunerOverrideZone = [[RemoteZoneList sharedList] getZoneWithZoneUUID:self.remoteZone.tunerOverrideZoneUUID];
+            [tunerOverrideZone.powerOffCommand sendCommandToServer:tunerOverrideZone.server withPrefix:tunerOverrideZone.prefixValue];
+        }
+    }
+    
+    // Send the custom post-power-on string
     [self.remoteServer sendString:self.remoteZone.customPostPowerOffString];
     if (self.remoteZone.mustRequestStatus) {
         [self.remoteZone  sendRequestForStatus];
@@ -613,8 +648,9 @@ numberOfRowsInComponent:(NSInteger)component
 
 - (IBAction)tunerPresetDown:(id)sender
 {
+    RemoteServer *server = self.remoteTuner.server;
     Command *command = self.remoteTuner.presetDownCommand;
-    [command sendCommandToServer:self.remoteServer withPrefix:self.remoteTuner.prefixValue];
+    [command sendCommandToServer:server withPrefix:self.remoteTuner.prefixValue];
   
     if (self.remoteTuner.mustRequestStatus) {
         [self.remoteTuner  sendRequestForStatus];
@@ -625,8 +661,9 @@ numberOfRowsInComponent:(NSInteger)component
 {
     if (self.remoteZone.powerStatus.state) {
         
+        RemoteServer *server = self.remoteTuner.server;
         Command *command = self.remoteTuner.presetUpCommand;
-        [command sendCommandToServer:self.remoteServer withPrefix:self.remoteTuner.prefixValue];
+        [command sendCommandToServer:server withPrefix:self.remoteTuner.prefixValue];
 
     } else if (self.userPreferences.enableAutoPowerOnTuner) {
     
@@ -667,8 +704,31 @@ numberOfRowsInComponent:(NSInteger)component
         NSInteger selectedRow = [self.linkPicker selectedRowInComponent:0];
         Hyperlink *h = self.hyperlinks[selectedRow];
         NSURL *myURL = [NSURL URLWithString:h.address];
-        [[UIApplication sharedApplication] openURL:myURL];
+        UIApplication *application = [UIApplication sharedApplication];
+        [application openURL:myURL options:@{} completionHandler:^(BOOL success) {
+            if (success) {
+                 NSLog(@"Opened url");
+            }
+        }];
     }
+}
+
+
+#pragma mark - Helpers
+
+- (BOOL)otherZonesUsingOverrideTuner
+{
+    NSArray *zones = [[RemoteZoneList sharedList] zones];
+    for (RemoteZone *z in zones) {
+        if ([z.tunerOverrideZoneUUID.UUIDString isEqualToString:self.remoteZone.tunerOverrideZoneUUID.UUIDString]) {
+            if (![z.zoneUUID.UUIDString isEqualToString:self.remoteZone.zoneUUID.UUIDString]){
+                if (z.powerStatus.state) {
+                    return YES;
+                }
+            }
+        }
+    }
+    return NO;
 }
 
 @end

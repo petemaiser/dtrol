@@ -9,7 +9,9 @@
 #import "RemoteTunerList.h"
 #import "RemoteTuner.h"
 #import "RemoteTunerNAD.h"
+#import "RemoteTunerAnthemAVM.h"
 #import "RemoteServer.h"
+#import "Status.h"
 
 @interface RemoteTunerList ()
 @property (nonatomic) NSMutableArray *privateTuners;
@@ -45,9 +47,19 @@
         // Startup the private items
         _privateTuners = [[NSMutableArray alloc] init];
         
-        // Try to retrieve saved items
-        NSString *path = [self archivePath];
-        NSMutableArray *tuners = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        // First try to retrieve saved items
+        NSError *error;
+        NSData *data = [[NSData alloc] initWithContentsOfFile:[self archivePath]];
+        NSSet *classes = [NSSet setWithObjects:[NSMutableArray class]
+                          ,[RemoteServer class]
+                          ,[RemoteTuner class]
+                          ,[RemoteTunerNAD class]
+                          ,[RemoteTunerAnthemAVM class]
+                          ,[Command class]
+                          ,[Status class]
+                          ,[NSString class]
+                          ,nil];
+        NSMutableArray *tuners = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
         
         // if there are saved items, load them into the private items,
         // while checking to see if any need to be upgraded
@@ -141,10 +153,9 @@
 
 - (BOOL)saveTuners
 {
-    NSString *path = [self archivePath];
-    
-    return [NSKeyedArchiver archiveRootObject:self.privateTuners
-                                       toFile:path];
+    NSError *error;
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:self.privateTuners requiringSecureCoding:YES error:&error];
+    return [data writeToFile:[self archivePath] atomically:YES];
 }
 
 @end

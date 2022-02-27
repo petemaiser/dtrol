@@ -9,6 +9,8 @@
 #import "RemoteZone.h"
 #import "RemoteServer.h"
 #import "Source.h"
+#import "Status.h"
+#import "Command.h"
 
 @interface RemoteZone ()
 
@@ -22,10 +24,13 @@
     
     // Set default values
     if (self) {
+        _zoneUUID = [[NSUUID alloc] init];
+        self.tunerOverrideZoneUUID = nil;
         self.nameShort = @"Z?";
         self.nameLong = @"";
         self.customPostPowerOnString = @"";
         self.customPostPowerOffString = @"";
+        self.isHidden = NO;
         self.isDynamicZoneCapable = NO;
         self.isDynamicZone = NO;
         self.volumeCommandTemplate = nil;
@@ -101,6 +106,9 @@
     [aCoder encodeObject:self.muteOffCommand forKey:@"muteOffCommand"];
     [aCoder encodeObject:self.sourceStatus forKey:@"sourceStatus"];
     [aCoder encodeObject:self.zoneSourceList forKey:@"zoneSourceList"];
+    [aCoder encodeObject:self.zoneUUID forKey:@"zoneUUID"];
+    [aCoder encodeObject:self.tunerOverrideZoneUUID forKey:@"tunerOverrideZoneUUID"];
+    [aCoder encodeBool:self.isHidden forKey:@"isHidden"];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -108,29 +116,53 @@
     self = [super initWithCoder:aDecoder];
     
     if (self) {
-        self.powerStatus = [aDecoder decodeObjectForKey:@"powerStatus"];
-        self.powerOnCommand = [aDecoder decodeObjectForKey:@"powerOnCommand"];
-        self.powerOffCommand = [aDecoder decodeObjectForKey:@"powerOffCommand"];
-        self.customPostPowerOnString = [aDecoder decodeObjectForKey:@"customPostPowerOnString"];
-        self.customPostPowerOffString = [aDecoder decodeObjectForKey:@"customPostPowerOffString"];
-        self.modeStatus = [aDecoder decodeObjectForKey:@"modeStatus"];
-        self.modeZoneCommand = [aDecoder decodeObjectForKey:@"modeZoneCommand"];
-        self.modeRecordCommand = [aDecoder decodeObjectForKey:@"modeRecordCommand"];
+        
+        self.powerStatus = [aDecoder decodeObjectOfClass:[Status class] forKey:@"powerStatus"];
+        self.powerOnCommand = [aDecoder decodeObjectOfClass:[Command class] forKey:@"powerOnCommand"];
+        self.powerOffCommand = [aDecoder decodeObjectOfClass:[Command class] forKey:@"powerOffCommand"];
+        self.customPostPowerOnString = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"customPostPowerOnString"];
+        self.customPostPowerOffString = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"customPostPowerOffString"];
+        
+        self.modeStatus =  [aDecoder decodeObjectOfClass:[Status class] forKey:@"modeStatus"];
+        self.modeZoneCommand =  [aDecoder decodeObjectOfClass:[Command class] forKey:@"modeZoneCommand"];
+        self.modeRecordCommand =  [aDecoder decodeObjectOfClass:[Command class] forKey:@"modeRecordCommand"];
+        
         self.isDynamicZoneCapable = [aDecoder decodeBoolForKey:@"isDynamicZoneCapable"];
         self.isDynamicZone = [aDecoder decodeBoolForKey:@"isDynamicZone"];
-        self.volumeControlFixed = [aDecoder decodeObjectForKey:@"volumeControlFixed"];
-        self.volumeStatus = [aDecoder decodeObjectForKey:@"volumeStatus"];
-        self.volumeCommandTemplate = [aDecoder decodeObjectForKey:@"volumeCommandTemplate"];
+        
+        self.volumeControlFixed =  [aDecoder decodeObjectOfClass:[Status class] forKey:@"volumeControlFixed"];
+        self.volumeStatus =  [aDecoder decodeObjectOfClass:[Status class] forKey:@"volumeStatus"];
+        self.volumeCommandTemplate =  [aDecoder decodeObjectOfClass:[Command class] forKey:@"volumeCommandTemplate"];
         self.usesVolumeHalfSteps = [aDecoder decodeBoolForKey:@"usesVolumeHalfSteps"];
-        self.volumeCommands = [aDecoder decodeObjectForKey:@"volumeCommands"];
-        self.muteStatus = [aDecoder decodeObjectForKey:@"muteStatus"];
-        self.muteOnCommand = [aDecoder decodeObjectForKey:@"muteOnCommand"];
-        self.muteOffCommand = [aDecoder decodeObjectForKey:@"muteOffCommand"];
-        self.sourceStatus = [aDecoder decodeObjectForKey:@"sourceStatus"];
-        self.zoneSourceList = [aDecoder decodeObjectForKey:@"zoneSourceList"];
+        NSSet *classes1 = [NSSet setWithObjects:[NSMutableArray class]
+                                                ,[Command class]
+                                                ,[NSString class]
+                                                ,nil];
+        self.volumeCommands = [aDecoder decodeObjectOfClasses:classes1 forKey:@"volumeCommands"];
+        
+        self.muteStatus =  [aDecoder decodeObjectOfClass:[Status class] forKey:@"muteStatus"];
+        self.muteOnCommand = [aDecoder decodeObjectOfClass:[Command class] forKey:@"muteOnCommand"];
+        self.muteOffCommand =  [aDecoder decodeObjectOfClass:[Command class] forKey:@"muteOffCommand"];
+        
+        self.sourceStatus =  [aDecoder decodeObjectOfClass:[Status class] forKey:@"sourceStatus"];
+        NSSet *classes2 = [NSSet setWithObjects:[NSMutableArray class]
+                                                ,[Command class]
+                                                ,[Source class]
+                                                ,[NSString class]
+                                                ,nil];
+        self.zoneSourceList = [aDecoder decodeObjectOfClasses:classes2 forKey:@"zoneSourceList"];
+        
+        _zoneUUID = [aDecoder decodeObjectOfClass:[NSUUID class] forKey:@"zoneUUID"];
+        self.tunerOverrideZoneUUID = [aDecoder decodeObjectOfClass:[NSUUID class] forKey:@"tunerOverrideZoneUUID"];
+        self.isHidden = [aDecoder decodeBoolForKey:@"isHidden"];
     }
     
     return self;
+}
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
 }
 
 @end

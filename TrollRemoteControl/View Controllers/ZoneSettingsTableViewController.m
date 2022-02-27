@@ -34,6 +34,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *recordModeForOffLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *recordModeForOffSwitch;
 
+@property (weak, nonatomic) IBOutlet UISwitch *hiddenZoneSwitch;
+
 @property (weak, nonatomic) IBOutlet UITableViewCell *tunerSettingsCell;
 @property (weak, nonatomic) IBOutlet UIButton *tunerSettingsButton;
 
@@ -113,6 +115,8 @@
         self.recordModeCell.hidden = YES;
     }
     
+    [self.hiddenZoneSwitch setOn:self.remoteZone.isHidden];
+    
     // Some components, e.g. Anthem pre-MRX components, do not support RS-232 access to tuner presets.
     // So we provide a custom Tuner Settings view to setup local presets (local to this app).
     // Hide it when we don't need it.
@@ -173,6 +177,8 @@
         self.remoteZone.isDynamicZone = self.recordModeForOffSwitch.isOn;
     }
     
+    self.remoteZone.isHidden = self.hiddenZoneSwitch.isOn;
+    
     // Protection of removing duplicates in case any were adding in the tuner settings.
     [self.remoteTuner removeStationDuplicates];
     
@@ -194,7 +200,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 6;
+        return 7;
     } else {
         return 2;
     }

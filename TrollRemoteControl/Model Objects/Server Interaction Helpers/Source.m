@@ -65,13 +65,18 @@
 {
     self = [super init];
     if (self) {
-        _name     = [aDecoder decodeObjectForKey:@"name"];
-        _variable = [aDecoder decodeObjectForKey:@"variable"];
-        _value    =    [aDecoder decodeObjectForKey:@"value"];
-        _sourceCommand  =  [aDecoder decodeObjectForKey:@"sourceCommand"];
-        _enabled  =  [aDecoder decodeObjectForKey:@"enabled"];
+        _name     = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"name"];
+        _variable = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"variable"];
+        _value    =    [aDecoder decodeObjectOfClass:[NSString class] forKey:@"value"];
+        _sourceCommand  =  [aDecoder decodeObjectOfClass:[Command class] forKey:@"sourceCommand"];
+        _enabled  =  [aDecoder decodeObjectOfClass:[NSString class] forKey:@"enabled"];
     }
     return self;
+}
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
 }
 
 @end

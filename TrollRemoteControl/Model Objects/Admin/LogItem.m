@@ -47,9 +47,14 @@
 {
     self = [super init];
     if (self) {
-        _text = [aDecoder decodeObjectForKey:@"text"];
+        _text = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"text"];
     }
     return self;
+}
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
 }
 
 @end

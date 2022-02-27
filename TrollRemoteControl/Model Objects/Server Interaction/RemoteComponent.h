@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 @class RemoteServer;
 
-@interface RemoteComponent : NSObject
+@interface RemoteComponent : NSObject <NSSecureCoding>
 
 @property (nonatomic, readonly, strong) NSUUID *serverUUID;
 @property (nonatomic, readonly, strong) RemoteServer *server;

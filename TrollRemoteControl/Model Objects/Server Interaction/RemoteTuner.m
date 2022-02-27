@@ -9,6 +9,7 @@
 #import "RemoteTuner.h"
 #import "RemoteServer.h"
 #import "TunerStation.h"
+#import "TunerStationAnthemAVM.h"
 
 @implementation RemoteTuner
 
@@ -81,15 +82,25 @@
     self = [super initWithCoder:aDecoder];
     
     if (self) {
-        self.frequencyText = [aDecoder decodeObjectForKey:@"frequencyText"];
-        self.presetText = [aDecoder decodeObjectForKey:@"presetText"];
+        self.frequencyText = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"frequencyText"];
+        self.presetText = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"presetText"];
         self.tunerPresetType = [aDecoder decodeBoolForKey:@"tunerPresetType"];
-        self.presetUpCommand = [aDecoder decodeObjectForKey:@"presetUpCommand"];
-        self.presetDownCommand = [aDecoder decodeObjectForKey:@"presetDownCommand"];
-        self.stations = [aDecoder decodeObjectForKey:@"stations"];
+        self.presetUpCommand = [aDecoder decodeObjectOfClass:[Command class] forKey:@"presetUpCommand"];
+        self.presetDownCommand = [aDecoder decodeObjectOfClass:[Command class] forKey:@"presetDownCommand"];
+        NSSet *classes = [NSSet setWithObjects:[NSMutableArray class]
+                          ,[TunerStation class]
+                          ,[TunerStationAnthemAVM class]
+                          ,[NSString class]
+                          ,nil];
+        self.stations = [aDecoder decodeObjectOfClasses:classes forKey:@"stations"];
     }
     
     return self;
+}
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
 }
 
 @end

@@ -13,6 +13,7 @@
 @interface RemoteZoneList : NSObject
 
 @property (nonatomic, readonly) NSArray *zones;
+@property (nonatomic, readonly) NSArray *zonesNotHidden;
 
 + (instancetype)sharedList;
 
@@ -28,6 +29,7 @@
 - (BOOL)validateServer:(RemoteServer *)server;
 
 - (RemoteZone *)getZoneWithServerUUID:(NSUUID *)uuid;
+- (RemoteZone *)getZoneWithZoneUUID:(NSUUID *)uuid;
 
 - (BOOL)saveZones;
 

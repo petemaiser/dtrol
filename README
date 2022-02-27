@@ -1,8 +1,14 @@
-This is the source code for “DTrol”, as available for iOS (iPhone and iPad).  This app was created by Peter James Maiser (Pete Maiser) in 2016, first published on the Apple App Store in 2017, and this source code was first published on GitHub in 2017.  Copyright (C) 2015 - 2017 Peter James Maiser.
+This is the source code for “DTrol”, as available for iOS (iPhone and iPad).  This app was created by Peter James Maiser (Pete Maiser) in 2016, first published on the Apple App Store in 2017, and this source code was first published on GitHub in 2017.  Copyright (C) 2015 - 2022 Peter James Maiser.
 
 This program comes with ABSOLUTELY NO WARRANTY.  See the included LICENSE file for detail on redistribution of this software.
 
 Release Updates:
+
+Release 1.2
+    - Small changes to enhance usability and stability
+    - Addressed deprecated iOS functions
+    - Renamed the "Airplay" auto-on feature to an "Apps" auto-on feature; updated the default list of linked Apps
+    - Added ability to hide zones (when Zone Setup buttons are hidden)
 
 Release 1.1
     - Small changes to enhance stability

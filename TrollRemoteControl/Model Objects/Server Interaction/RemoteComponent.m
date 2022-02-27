@@ -118,16 +118,25 @@
 {
     self = [self init];
     if (self) {
-        [self setServerAsUUID:[aDecoder decodeObjectForKey:@"serverUUID"]];
-        _logFile = [aDecoder decodeObjectForKey:@"logFile"];
-        _nameShort = [aDecoder decodeObjectForKey:@"nameShort"];
-        _nameLong = [aDecoder decodeObjectForKey:@"nameLong"];
-        _prefixValue = [aDecoder decodeObjectForKey:@"prefixValue"];
-        _statusSet = [aDecoder decodeObjectForKey:@"statusSet"];
+        [self setServerAsUUID:[aDecoder decodeObjectOfClass:[NSUUID class] forKey:@"serverUUID"]];
+        _logFile = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"logFile"];
+        _nameShort = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"nameShort"];
+        _nameLong = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"nameLong"];
+        _prefixValue = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"prefixValue"];
+        NSSet *classes = [NSSet setWithObjects:[NSSet class]
+                          ,[Status class]
+                          ,[NSString class]
+                          ,nil];
+        _statusSet = [aDecoder decodeObjectOfClasses:classes forKey:@"statusSet"];
         _mustRequestStatus = [aDecoder decodeBoolForKey:@"mustRequestStatus"];
         _modelObjectVersion = [aDecoder decodeIntegerForKey:@"modelObjectVersion"];
     }
     return self;
+}
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
 }
 
 @end

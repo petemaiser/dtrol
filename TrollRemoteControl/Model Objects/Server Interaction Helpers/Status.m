@@ -62,12 +62,17 @@
 {
     self = [super init];
     if (self) {
-        _variable = [aDecoder decodeObjectForKey:@"variable"];
-        _statusCommandValue = [aDecoder decodeObjectForKey:@"statusCommandValue"];
-        _value = [aDecoder decodeObjectForKey:@"value"];
+        _variable = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"variable"];
+        _statusCommandValue = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"statusCommandValue"];
+        _value = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"value"];
         _state = [aDecoder decodeIntegerForKey:@"state"];
     }
     return self;
+}
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
 }
 
 @end

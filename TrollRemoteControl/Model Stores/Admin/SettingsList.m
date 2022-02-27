@@ -45,15 +45,23 @@
         
         // First try to retrieve saved settings...each setting at a time
         // If there is no saved setting then setup a default
-        
+
+        NSError *error;
         NSString * pathForHyperlinks = [[self archiveDirectory] stringByAppendingPathComponent:[self archiveFileName:hyperlinksFile]];
-        _privateHyperlinks = [NSKeyedUnarchiver unarchiveObjectWithFile:pathForHyperlinks];
+        NSData *dataHyperlinks = [[NSData alloc] initWithContentsOfFile:pathForHyperlinks];
+        NSSet *classes1 = [NSSet setWithObjects:[NSMutableArray class]
+                                                ,[Hyperlink class]
+                                                ,[NSString class]
+                                                ,nil];
+        _privateHyperlinks = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes1 fromData:dataHyperlinks error:&error];
         if (!_privateHyperlinks) {
             [self hyperlinksDefaults];
         }
         
-        NSString * pathForUserPreferences = [[self archiveDirectory] stringByAppendingPathComponent:[self archiveFileName:userPreferencesFile]];
-        _userPreferences = [NSKeyedUnarchiver unarchiveObjectWithFile:pathForUserPreferences];
+        NSString *pathForUserPreferences = [[self archiveDirectory] stringByAppendingPathComponent:[self archiveFileName:userPreferencesFile]];
+        NSData *dataPreferences = [[NSData alloc] initWithContentsOfFile:pathForUserPreferences];
+        NSSet *classes2 = [NSSet setWithObjects:[UserPreferences class], nil];
+        _userPreferences = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes2 fromData:dataPreferences error:&error];
         if (!_userPreferences) {
             UserPreferences *prefs = [[UserPreferences alloc] init];
             self.userPreferences = prefs;
@@ -119,14 +127,14 @@
     
     hyperlink = nil;
     hyperlink = [[Hyperlink alloc] init];
-    hyperlink.name = @"Pandora";
-    hyperlink.address = @"pandora://";
+    hyperlink.name = @"Remote";
+    hyperlink.address = @"remote://";
     [hyperlinks addObject:hyperlink];
-
+    
     hyperlink = nil;
     hyperlink = [[Hyperlink alloc] init];
-    hyperlink.name = @"Spotify";
-    hyperlink.address = @"spotify://";
+    hyperlink.name = @"Pandora";
+    hyperlink.address = @"pandora://";
     [hyperlinks addObject:hyperlink];
 
     hyperlink = nil;
@@ -137,8 +145,14 @@
     
     hyperlink = nil;
     hyperlink = [[Hyperlink alloc] init];
-    hyperlink.name = @"iHeartRadio";
-    hyperlink.address = @"iheartradio://";
+    hyperlink.name = @"Amazon Video";
+    hyperlink.address = @"aiv://";
+    [hyperlinks addObject:hyperlink];
+    
+    hyperlink = nil;
+    hyperlink = [[Hyperlink alloc] init];
+    hyperlink.name = @"Plex";
+    hyperlink.address = @"plexapp://";
     [hyperlinks addObject:hyperlink];
     
     hyperlink = nil;
@@ -149,8 +163,26 @@
     
     hyperlink = nil;
     hyperlink = [[Hyperlink alloc] init];
-    hyperlink.name = @"Plex";
-    hyperlink.address = @"plexapp://";
+    hyperlink.name = @"Hulu";
+    hyperlink.address = @"hulu://";
+    [hyperlinks addObject:hyperlink];
+
+    hyperlink = nil;
+    hyperlink = [[Hyperlink alloc] init];
+    hyperlink.name = @"HBO Max";
+    hyperlink.address = @"hbomax://";
+    [hyperlinks addObject:hyperlink];
+    
+    hyperlink = nil;
+    hyperlink = [[Hyperlink alloc] init];
+    hyperlink.name = @"Spotify";
+    hyperlink.address = @"spotify://";
+    [hyperlinks addObject:hyperlink];
+    
+    hyperlink = nil;
+    hyperlink = [[Hyperlink alloc] init];
+    hyperlink.name = @"iHeartRadio";
+    hyperlink.address = @"iheartradio://";
     [hyperlinks addObject:hyperlink];
 
     hyperlink = nil;
@@ -163,12 +195,6 @@
     hyperlink = [[Hyperlink alloc] init];
     hyperlink.name = @"Videos";
     hyperlink.address = @"videos://";
-    [hyperlinks addObject:hyperlink];
-
-    hyperlink = nil;
-    hyperlink = [[Hyperlink alloc] init];
-    hyperlink.name = @"Remote";
-    hyperlink.address = @"remote://";
     [hyperlinks addObject:hyperlink];
     
     self.privateHyperlinks = hyperlinks;
@@ -197,18 +223,18 @@
 
 - (BOOL)saveSettingsHyperlinks
 {
-    NSString *path = [[self archiveDirectory] stringByAppendingPathComponent:[self archiveFileName:hyperlinksFile]];
-    
-    return [NSKeyedArchiver archiveRootObject:self.privateHyperlinks
-                                       toFile:path];
+    NSString *pathForHyperlinks = [[self archiveDirectory] stringByAppendingPathComponent:[self archiveFileName:hyperlinksFile]];
+    NSError *error;
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:self.privateHyperlinks requiringSecureCoding:YES error:&error];
+    return [data writeToFile:pathForHyperlinks atomically:YES];
 }
 
 - (BOOL)saveSettingsUserPreferences
 {
-    NSString *path = [[self archiveDirectory] stringByAppendingPathComponent:[self archiveFileName:userPreferencesFile]];
-    
-    return [NSKeyedArchiver archiveRootObject:self.userPreferences
-                                       toFile:path];
+    NSString *archivePath = [[self archiveDirectory] stringByAppendingPathComponent:[self archiveFileName:userPreferencesFile]];
+    NSError *error;
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:self.userPreferences requiringSecureCoding:YES error:&error];
+    return [data writeToFile:archivePath atomically:YES];
 }
 
 @end

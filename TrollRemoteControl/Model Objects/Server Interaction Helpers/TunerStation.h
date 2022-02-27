@@ -13,7 +13,7 @@
 #import <Foundation/Foundation.h>
 @class RemoteServer;
 
-@interface TunerStation : NSObject
+@interface TunerStation : NSObject <NSSecureCoding>
 
 @property (nonatomic) NSString *frequencyText;
 

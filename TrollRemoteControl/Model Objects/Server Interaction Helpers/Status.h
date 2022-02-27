@@ -36,7 +36,7 @@ typedef NS_ENUM(NSInteger, RemoteStatusState) {
     ,RemoteStatusStateNone = -1
 };
 
-@interface Status : NSObject <NSCopying>
+@interface Status : NSObject <NSCopying, NSSecureCoding>
 
 @property (nonatomic, copy) NSString *variable;                 // The "variable" the processor uses for this particular status item
 @property (nonatomic, copy) NSString *value;                    // The current status value

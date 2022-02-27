@@ -72,20 +72,25 @@
     self = [super init];
     if (self) {
 
-        _variable = [aDecoder decodeObjectForKey:@"variable"];
+        _variable = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"variable"];
         _modelObjectVersion = [aDecoder decodeIntegerForKey:@"modelObjectVersion"];
         
         if (_modelObjectVersion >= 1) {
-            _parameterPrefix = [aDecoder decodeObjectForKey:@"parameterPrefix"];
-            _parameter = [aDecoder decodeObjectForKey:@"parameter"];
+            _parameterPrefix = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"parameterPrefix"];
+            _parameter = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"parameter"];
         } else {
-            _parameterPrefix = [aDecoder decodeObjectForKey:@"commandValuePrefix"];
-            _parameter = [aDecoder decodeObjectForKey:@"commandValue"];
+            _parameterPrefix = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"commandValuePrefix"];
+            _parameter = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"commandValue"];
             _modelObjectVersion = 1;
         }
 
     }
     return self;
+}
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
 }
 
 @end

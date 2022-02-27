@@ -227,7 +227,13 @@
         
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         
-        NSArray *zones = [[RemoteZoneList sharedList] zones];
+        NSArray *zones = nil;
+        SettingsList *settings = [SettingsList sharedSettingsList];
+        if (settings.userPreferences.showZoneSetupButtons) {
+            zones = [[RemoteZoneList sharedList] zones];
+        } else {
+            zones = [[RemoteZoneList sharedList] zonesNotHidden];
+        }
         RemoteZone *zone = zones[indexPath.row];
         
         DetailViewController *vc = (DetailViewController *)[[segue destinationViewController] topViewController];
@@ -278,41 +284,53 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[RemoteZoneList sharedList] zones] count];
+    SettingsList *settings = [SettingsList sharedSettingsList];
+    if (settings.userPreferences.showZoneSetupButtons) {
+        return [[[RemoteZoneList sharedList] zones] count];
+    } else {
+        return [[[RemoteZoneList sharedList] zonesNotHidden] count];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ZoneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ZoneCell" forIndexPath:indexPath];
-
-    NSArray *zones = [[RemoteZoneList sharedList] zones];
     
-    if (zones) {
+    if (cell) {
     
+        NSArray *zones = nil;
+        SettingsList *settings = [SettingsList sharedSettingsList];
+        if (settings.userPreferences.showZoneSetupButtons) {
+            zones = [[RemoteZoneList sharedList] zones];
+        } else {
+            zones = [[RemoteZoneList sharedList] zonesNotHidden];
+        }
         RemoteZone *zone = zones[indexPath.row];
         
-        cell.serverNameShortLabel.text = zone.server.nameShort;
-        cell.zoneNameLabel.text = zone.nameLong;
-        
-        if (zone.server.isConnected) {
-        
-            [cell.zonePowerStatusSwitch setOn:zone.powerStatus.state];
+        if (zone) {
+            cell.serverNameShortLabel.text = zone.server.nameShort;
+            cell.zoneNameLabel.text = zone.nameLong;
             
-            for (Source *s in zone.sourceList) {
-                if ([s.value isEqualToString:zone.sourceStatus.value]) {
-                    cell.zoneSourceNameLabel.text = s.name;
-                    break;
+            if (zone.server.isConnected) {
+            
+                [cell.zonePowerStatusSwitch setOn:zone.powerStatus.state];
+                
+                for (Source *s in zone.sourceList) {
+                    if ([s.value isEqualToString:zone.sourceStatus.value]) {
+                        cell.zoneSourceNameLabel.text = s.name;
+                        break;
+                    }
                 }
+                
+                [cell.zonePowerStatusSwitch setHidden:NO];
+                [cell.zoneSourceNameLabel setHidden:NO];
+                [cell setUserInteractionEnabled:YES];
+                
+            } else {
+                [cell.zonePowerStatusSwitch setHidden:YES];
+                [cell.zoneSourceNameLabel setHidden:YES];
+                [cell setUserInteractionEnabled:NO];
             }
-            
-            [cell.zonePowerStatusSwitch setHidden:NO];
-            [cell.zoneSourceNameLabel setHidden:NO];
-            [cell setUserInteractionEnabled:YES];
-            
-        } else {
-            [cell.zonePowerStatusSwitch setHidden:YES];
-            [cell.zoneSourceNameLabel setHidden:YES];
-            [cell setUserInteractionEnabled:NO];
         }
         
     }

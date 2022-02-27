@@ -90,10 +90,32 @@
     [super viewWillDisappear:animated];
     
     // Save any settings that have not already been saved
+    BOOL saved = NO;
     SettingsList *settings = [SettingsList sharedSettingsList];
     if (settings) {
+        // settings.userPreferences.showZoneSetupButtons can be skipped because it is already saved via showZoneSetupSwichChanged:
         settings.userPreferences.enableAutoPowerOnTuner = self.tunerAutoOnSwitch.isOn;
         settings.userPreferences.enableAutoPowerOnAirplay = self.airplayAutoOnSwitch.isOn;
+        saved = [settings saveSettings];
+    }
+    
+    // Log successful save (or not)
+    Log *sharedLog = [Log sharedLog];
+    if (sharedLog) {
+        LogItem *logTextLine1;
+        NSDate *date = [[NSDate alloc] init];
+        if (saved) {
+            logTextLine1 = [LogItem logItemWithText:[NSString stringWithFormat:@"%s:  Master Settings Saved: %@"
+                                                              ,getprogname()
+                                                              ,[self.dateFormatter stringFromDate:date] ]];
+        } else {
+            logTextLine1 = [LogItem logItemWithText:[NSString stringWithFormat:@"%s:  Master Settings Save Failed: %@"
+                                                              ,getprogname()
+                                                              ,[self.dateFormatter stringFromDate:date] ]];
+        }
+        [sharedLog addDivider];
+        [sharedLog addItem:logTextLine1];
+        [sharedLog addDivider];
     }
 }
 
@@ -129,6 +151,7 @@
     SettingsList *settings = [SettingsList sharedSettingsList];
     settings.userPreferences.showZoneSetupButtons = self.showZoneSetupSwitch.isOn;
     [self.masterViewController refreshZoneSetupButtons];
+    [self.masterViewController reloadTable];
 }
 
 

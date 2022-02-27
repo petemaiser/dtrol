@@ -12,6 +12,8 @@
 #import "DetailViewController.h"
 #import "RemoteServer.h"
 #import "RemoteServerList.h"
+#import "RemoteTunerList.h"
+#import "RemoteZoneList.h"
 #import "UserPreferences.h"
 #import "SettingsList.h"
 #import "Reachability.h"
@@ -44,14 +46,8 @@
     
     self.serverSetupController = nil;
     self.saveButton.enabled = NO;
-    
-    if ([[[RemoteServerList sharedList] servers] count] < 2) {
-        [self.addDemoCell setHidden:NO];
-        [self.addDemoServerButton setEnabled:YES];
-    } else {
-        [self.addDemoServerButton setEnabled:NO];
-        [self.addDemoCell setHidden:YES];
-    }
+    [self.addDemoCell setHidden:NO];
+    [self.addDemoServerButton setEnabled:YES];
     
     // Configure helpers
     self.feedbackTextView.clearsOnInsertion = YES;
@@ -133,18 +129,32 @@
     // Clear the first responder
     [self.view endEditing:YES];
     
+    // Save any items that were created
     if (self.serverSetupController)
     {
+        BOOL serversSaved = [[RemoteServerList sharedList] saveServers];
+        BOOL tunersSaved = [[RemoteTunerList sharedList] saveTuners];
+        BOOL zonesSaved = [[RemoteZoneList sharedList] saveZones];
+        
         // Log the creation of the new item
         Log *sharedLog = [Log sharedLog];
+        LogItem *logTextLine1;
         if (sharedLog) {
+            if (serversSaved&&tunersSaved&&zonesSaved) {
+                logTextLine1 = [LogItem logItemWithText:[NSString stringWithFormat:@"%s:  Server (%@) \"%@\" created and Saved: %@"
+                                                                      ,getprogname()
+                                                                      ,self.serverSetupController.server.nameShort
+                                                                      ,self.serverSetupController.server.nameLong
+                                                                      ,[self.dateFormatter stringFromDate:self.serverSetupController.server.dateCreated] ]];
+            } else {
+                logTextLine1 = [LogItem logItemWithText:[NSString stringWithFormat:@"%s:  Server (%@) \"%@\" created but Save Failed: %@"
+                                                                      ,getprogname()
+                                                                      ,self.serverSetupController.server.nameShort
+                                                                      ,self.serverSetupController.server.nameLong
+                                                                      ,[self.dateFormatter stringFromDate:self.serverSetupController.server.dateCreated] ]];
+            }
             [sharedLog addDivider];
-            LogItem *logTextLineFirst = [LogItem logItemWithText:[NSString stringWithFormat:@"%s:  Server (%@) \"%@\" created: %@"
-                                                                  ,getprogname()
-                                                                  ,self.serverSetupController.server.nameShort
-                                                                  ,self.serverSetupController.server.nameLong
-                                                                  ,[self.dateFormatter stringFromDate:self.serverSetupController.server.dateCreated] ]];
-            [sharedLog addItem:logTextLineFirst];
+            [sharedLog addItem:logTextLine1];
             [sharedLog addDivider];
         }
     }
@@ -190,7 +200,7 @@
     }
 
     // ~Refresh Master view, if needed
-    if (self.masterViewController.splitViewController.displayMode == UISplitViewControllerDisplayModeAllVisible ) {
+    if (self.masterViewController.splitViewController.displayMode == UISplitViewControllerDisplayModeOneBesideSecondary ) {
         
         [self.masterViewController reloadTable];
         
@@ -202,7 +212,7 @@
 - (IBAction)save:(id)sender
 {
     // ~Refresh Master view, if needed
-    if (self.masterViewController.splitViewController.displayMode == UISplitViewControllerDisplayModeAllVisible ) {
+    if (self.masterViewController.splitViewController.displayMode == UISplitViewControllerDisplayModeOneBesideSecondary ) {
         
         // Show the log view (only when in split view)
         if (self.masterViewController.splitViewController.collapsed == NO) {

@@ -10,6 +10,10 @@
 #import "RemoteZone.h"
 #import "RemoteZoneNAD.h"
 #import "RemoteServer.h"
+#import "Command.h"
+#import "Status.h"
+#import "Source.h"
+
 
 @interface RemoteZoneList ()
 
@@ -47,18 +51,29 @@
         // Startup the private items
         _privateZones = [[NSMutableArray alloc] init];
         
-        // Try to retrieve saved items
-        NSString *path = [self archivePath];
-        NSMutableArray *zones = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        // First try to retrieve saved items
+        NSError *error;
+        NSData *data = [[NSData alloc] initWithContentsOfFile:[self archivePath]];
+        NSSet *classes = [NSSet setWithObjects:[NSMutableArray class]
+                                                ,[NSArray class]
+                                                ,[NSSet class]
+                                                ,[RemoteZone class]
+                                                ,[RemoteServer class]
+                                                ,[Command class]
+                                                ,[Status class]
+                                                ,[Source class]
+                                                ,[NSString class]
+                                                ,nil];
+        NSMutableArray *zones = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
         
         // if there are saved items, load them into the private items,
         // while checking to see if any need to be upgraded
         if (zones) {
-            for (RemoteZone *rz in zones) {
-                if (rz.modelObjectVersion >= 1) {
-                    [_privateZones addObject:rz];
+            for (RemoteZone *z in zones) {
+                if (z.modelObjectVersion >= 1) {
+                    [_privateZones addObject:z];
                 } else {
-                    RemoteZoneNAD *rzNAD = [[RemoteZoneNAD alloc] initWithRemoteZone:rz];
+                    RemoteZoneNAD *rzNAD = [[RemoteZoneNAD alloc] initWithRemoteZone:z];
                     [_privateZones addObject:rzNAD];
                 }
             }
@@ -70,8 +85,20 @@
 
 - (NSArray *)zones
 {
-    //Override the getter of the array to return a copy of private items
+    // Override the getter of the array to return a copy of private items
     return [self.privateZones copy];
+}
+
+- (NSArray *)zonesNotHidden
+{
+    // Build an array that does not contain the hidden zones
+    NSMutableArray *znh = [[NSMutableArray alloc] init];
+    for (RemoteZone *z in self.privateZones) {
+        if (!z.isHidden) {
+            [znh addObject:z];
+        }
+    }
+    return [znh copy];
 }
 
 - (void)addZone:(RemoteZone *)zone
@@ -93,14 +120,14 @@
 {
     NSMutableArray *deleteQueue = [[NSMutableArray alloc] init];
     
-    for (RemoteZone *zone in self.privateZones) {
-        if ([zone.serverUUID.UUIDString isEqualToString:server.serverUUID.UUIDString]) {
-            [deleteQueue addObject:zone];
+    for (RemoteZone *z in self.privateZones) {
+        if ([z.serverUUID.UUIDString isEqualToString:server.serverUUID.UUIDString]) {
+            [deleteQueue addObject:z];
         }
     }
     
-    for (RemoteZone *zone in deleteQueue) {
-        [self deleteZone:zone];
+    for (RemoteZone *z in deleteQueue) {
+        [self deleteZone:z];
     }
 }
 
@@ -121,16 +148,16 @@
 - (void)handleString:(NSString *)string
           fromServer:(RemoteServer *)server
 {
-    for (RemoteZone *zone in self.privateZones) {
-        [zone handleString:string
+    for (RemoteZone *z in self.privateZones) {
+        [z handleString:string
                 fromServer:server];
     }
 }
 
 - (BOOL)validateServer:(RemoteServer *)server
 {
-    for (RemoteZone *zone in self.privateZones) {
-        if ([zone.serverUUID.UUIDString isEqualToString:server.serverUUID.UUIDString]) {
+    for (RemoteZone *z in self.privateZones) {
+        if ([z.serverUUID.UUIDString isEqualToString:server.serverUUID.UUIDString]) {
             return YES;  // A server is "valid" if at least one zone is using it
         }
     }
@@ -151,6 +178,21 @@
     return zone;
 }
 
+- (RemoteZone *)getZoneWithZoneUUID:(NSUUID *)uuid
+{
+    RemoteZone *zone = nil;
+    
+    for (RemoteZone *z in self.privateZones) {
+        if ([z.zoneUUID.UUIDString isEqualToString:uuid.UUIDString]) {
+            zone = z;
+            break;
+        }
+    }
+    
+    return zone;
+}
+
+
 - (NSString *)archivePath
 {
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -166,10 +208,9 @@
 
 - (BOOL)saveZones
 {
-    NSString *path = [self archivePath];
-    
-    return [NSKeyedArchiver archiveRootObject:self.privateZones
-                                       toFile:path];
+    NSError *error;
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:self.privateZones requiringSecureCoding:YES error:&error];
+    return [data writeToFile:[self archivePath] atomically:YES];
 }
 
 @end

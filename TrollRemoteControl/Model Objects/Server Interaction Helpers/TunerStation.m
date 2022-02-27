@@ -36,9 +36,14 @@
 {
     self = [super init];
     if (self) {
-        _frequencyText = [aDecoder decodeObjectForKey:@"frequencyText"];
+        _frequencyText = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"frequencyText"];
     }
     return self;
+}
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
 }
 
 @end

@@ -124,13 +124,18 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        _bandStatus = [aDecoder decodeObjectForKey:@"bandStatus"];
-        _AMFrequencyStatus = [aDecoder decodeObjectForKey:@"AMFrequencyStatus"];
-        _FMFrequencyStatus = [aDecoder decodeObjectForKey:@"FMFrequencyStatus"];
-        _presetStatus =     [aDecoder decodeObjectForKey:@"presetStatus"];
+        _bandStatus = [aDecoder decodeObjectOfClass:[Status class] forKey:@"bandStatus"];
+        _AMFrequencyStatus = [aDecoder decodeObjectOfClass:[Status class] forKey:@"AMFrequencyStatus"];
+        _FMFrequencyStatus = [aDecoder decodeObjectOfClass:[Status class] forKey:@"FMFrequencyStatus"];
+        _presetStatus =     [aDecoder decodeObjectOfClass:[Status class] forKey:@"presetStatus"];
     }
     
     return self;
+}
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
 }
 
 @end

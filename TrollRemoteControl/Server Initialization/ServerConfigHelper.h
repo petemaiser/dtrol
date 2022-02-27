@@ -17,9 +17,9 @@
 @class RemoteZone;
 @class ServerSetupController;
 
-@interface ServerConfigHelper : NSObject            // Helper object to interrogate servers to build settings as part of app configuration
-                                                    // This object should be subclassed to implement specific device families or protocols
-                                                    // e.g. for NAD, Anthem pre-MRX, etc.
+@interface ServerConfigHelper : NSObject                    // Helper object to interrogate servers to build settings as part of app configuration
+                                                            // This object should be subclassed to implement specific device families or protocols
+                                                            // e.g. for NAD, Anthem pre-MRX, etc.
 
 @property (weak, nonatomic) ServerSetupController *serverSetupController;
 
@@ -27,25 +27,29 @@
 - (instancetype)initWithServerSetupController:(ServerSetupController *)ssc;  // Subclasses should generally extend this for any additional initialization
 
 // Server Configuration Process
-- (void)startServerConfiguration;                       // Start the config process by setting-up the structure and then starting Interrogation
-                                                        // Interrogation sends requests to the Server to learn about current state
-- (void)checkServerInterrogationStatus;                 // Check on Interrogation status and send a notification if complete
-- (void)abortServerConfiguration;                       // Stop the config process and clean-up
-- (void)finishServerConfiguration;                      // Called when Interrogation is complete (or we are giving-up) to finish the Configuration process
+- (void)startServerConfiguration;                           // Start the config process by setting-up the structure and then starting Interrogation
+                                                            // Interrogation sends requests to the Server to learn about current state
+- (void)checkServerInterrogationStatus;                     // Check on Interrogation status and send a notification if complete
+- (void)abortServerConfiguration;                           // Stop the config process and clean-up
+- (void)finishServerConfiguration;                          // Called when Interrogation is complete (or we are giving-up) to finish the Configuration process
 
 // Volume Settings-Configuration Helpers
-- (void)setVolumeRangeForZone:(RemoteZone *)zone        // Help set volume
+- (void)setVolumeRangeForZone:(RemoteZone *)zone            // Help set volume
       withVolumeControlStatus:(NSString *)volumeControlStatus
                withBaseVolume:(NSString *)baseVolume;
 - (void)setVolumeRangeForZone:(RemoteZone *)zone
                     fromValue:(int)fromValue
                       toValue:(int)toValue;
 
+// Other Helplers
+- (RemoteZone *)getZoneWithServerIP:(NSString *)IP          // Get the zone by these parameters.  The reason this is here instead of part of the Model is because this
+                    andZoneNameLong:(NSString  *)znl;       // should only be used as part of server config, before the user has a chance to have changed zone name long
+
 // Demo Mode
 @property (nonatomic) NSInteger demoMode;
-@property BOOL mustRequestSourceInfo;       // Helper property, determines if info should be requested about Sources
-@property BOOL mustRequestVolumeInfo;       // Helper property, determines if info should be requested for volume from the Zones
-@property BOOL mustRequestOtherCustomInfo;  // Helper property, determines if other custom info should be requested
+@property BOOL mustRequestSourceInfo;                       // Helper property, determines if info should be requested about Sources
+@property BOOL mustRequestVolumeInfo;                       // Helper property, determines if info should be requested for volume from the Zones
+@property BOOL mustRequestOtherCustomInfo;                  // Helper property, determines if other custom info should be requested
 - (void)processDemoMode:(NSInteger)demoMode;
 
 @end

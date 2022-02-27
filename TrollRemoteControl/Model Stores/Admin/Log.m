@@ -50,8 +50,13 @@
         }
         
         // First try to retrieve saved items
-        NSString * path = [self archivePath];
-        _privateLogItems = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        NSError *error;
+        NSData *data = [[NSData alloc] initWithContentsOfFile:[self archivePath]];
+        NSSet *classes = [NSSet setWithObjects:[NSMutableArray class]
+                                                ,[LogItem class]
+                                                ,[NSString class]
+                                                ,nil];
+        _privateLogItems = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
         
         // If there are no saved items then start fresh
         if (!_privateLogItems) {
@@ -115,25 +120,9 @@
     }
     
     // Archive
-    NSString *path = [self archivePath];
-    return [NSKeyedArchiver archiveRootObject:self.privateLogItems
-                                       toFile:path];
-}
-
-- (void)encodeWithCoder:( NSCoder *) aCoder
-{
-    [aCoder encodeObject:self.privateLogItems forKey:@"privateLogItems"];
-
-}
-
-- (instancetype)initWithCoder:( NSCoder *) aDecoder
-{
-    self = [super init];
-    if (self) {
-        _privateLogItems = [aDecoder decodeObjectForKey:@"privateLogItems"];
-    }
-    
-    return self;
+    NSError *error;
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:self.privateLogItems requiringSecureCoding:YES error:&error];
+    return [data writeToFile:[self archivePath] atomically:YES];
 }
 
 - (NSString *)archivePath

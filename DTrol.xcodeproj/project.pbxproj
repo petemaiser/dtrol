@@ -34,6 +34,7 @@
 		B50304941D7B335A001C1D59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5B8397E1D4565C50095F03D /* Main.storyboard */; };
 		B50304951D7B335A001C1D59 /* bluegear32.edited.png in Resources */ = {isa = PBXBuildFile; fileRef = B5B839B81D457CC60095F03D /* bluegear32.edited.png */; };
 		B50669C31E5FE79C006C368C /* NSString+ResponseString.m in Sources */ = {isa = PBXBuildFile; fileRef = B50669C21E5FE79C006C368C /* NSString+ResponseString.m */; };
+		B5075AB227BC933600366AA7 /* DemoServers.m in Sources */ = {isa = PBXBuildFile; fileRef = B5075AB127BC933600366AA7 /* DemoServers.m */; };
 		B5185DEA1E4FB18100492130 /* SourceSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5185DE91E4FB18100492130 /* SourceSettingsViewController.m */; };
 		B5185DED1E4FC73E00492130 /* SourceSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5185DEC1E4FC73E00492130 /* SourceSettingsCell.m */; };
 		B51E31521FB78D570093DA6B /* ServerFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = B51E31511FB78D570093DA6B /* ServerFinder.m */; };
@@ -68,6 +69,8 @@
 		B50304991D7B335A001C1D59 /* DTrol.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DTrol.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B50669C11E5FE79C006C368C /* NSString+ResponseString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ResponseString.h"; sourceTree = "<group>"; };
 		B50669C21E5FE79C006C368C /* NSString+ResponseString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ResponseString.m"; sourceTree = "<group>"; };
+		B5075AB027BC933600366AA7 /* DemoServers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoServers.h; sourceTree = "<group>"; };
+		B5075AB127BC933600366AA7 /* DemoServers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoServers.m; sourceTree = "<group>"; };
 		B517A4861D67E608001A1D5B /* ZoneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoneCell.h; sourceTree = "<group>"; };
 		B517A4871D67E608001A1D5B /* ZoneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoneCell.m; sourceTree = "<group>"; };
 		B5185DE81E4FB18100492130 /* SourceSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceSettingsViewController.h; sourceTree = "<group>"; };
@@ -345,6 +348,8 @@
 				B5B839B41D45683D0095F03D /* Log.m */,
 				B5B839901D4567050095F03D /* SettingsList.h */,
 				B5B8398F1D4567050095F03D /* SettingsList.m */,
+				B5075AB027BC933600366AA7 /* DemoServers.h */,
+				B5075AB127BC933600366AA7 /* DemoServers.m */,
 			);
 			path = Admin;
 			sourceTree = "<group>";
@@ -452,7 +457,7 @@
 		B5B839671D4565C50095F03D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Pete Maiser";
 				TargetAttributes = {
 					B50304761D7B335A001C1D59 = {
@@ -462,7 +467,7 @@
 			};
 			buildConfigurationList = B5B8396A1D4565C50095F03D /* Build configuration list for PBXProject "DTrol" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -524,6 +529,7 @@
 				B5D7F9FF1D9DAEB100C7BCD9 /* WiFiWarningViewController.m in Sources */,
 				B50304811D7B335A001C1D59 /* RemoteServerList.m in Sources */,
 				B5BED27B1FBA81BA0084D3FB /* ServerFinderALL.m in Sources */,
+				B5075AB227BC933600366AA7 /* DemoServers.m in Sources */,
 				B50304821D7B335A001C1D59 /* DetailViewController.m in Sources */,
 				B53EF4231E56A93300B473C3 /* ZoneSettingsTableViewController.m in Sources */,
 				B59083811D7B508100DA474B /* LinkCell.m in Sources */,
@@ -580,8 +586,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/TrollRemoteControl/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maiser.TrollRemoteControl.D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -596,8 +603,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/TrollRemoteControl/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maiser.TrollRemoteControl.D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -609,6 +617,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -618,14 +627,17 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -650,7 +662,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -662,6 +674,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -671,14 +684,17 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -697,7 +713,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

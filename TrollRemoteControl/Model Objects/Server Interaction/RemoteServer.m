@@ -7,6 +7,7 @@
 //
 
 #import "RemoteServer.h"
+#import "Command.h"
 #import "Source.h"
 #import "Reachability.h"
 #import "RemoteComponent.h"
@@ -83,6 +84,9 @@
         self.nameShort = @"";
         self.model = @"";
         self.airplaySourceValue = @"";
+        
+        self.customIfString = @"";
+        self.customThenString = @"";
     
         // Setup handling for a reachability change
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -242,6 +246,11 @@
                                                    fromServer:self];
                 }
                 
+                
+                if ([responseString isEqualToString:self.customIfString]) {
+                    [self sendString:self.customThenString];
+                }
+                
             }
             
             // The for loop above leaves out the last string.  This is because componentsSeparatedByString will produce an empty string
@@ -276,6 +285,10 @@
                         [[RemoteZoneList sharedList] handleString:mendedString
                                                        fromServer:self];
                     }
+                    if ([mendedString isEqualToString:self.customIfString]) {
+                        [self sendString:self.customThenString];
+                    }
+        
                 }
                 
                 // Fragment from this event
@@ -565,6 +578,9 @@
     [aCoder encodeObject:self.lineTerminationString forKey:@"lineTerminationString"];
     [aCoder encodeBool:self.treatSpaceAsLineTermination forKey:@"treatSpaceAsLineTermination"];
     
+    [aCoder encodeObject:self.customIfString forKey:@"customIfString"];
+    [aCoder encodeObject:self.customThenString forKey:@"customThenString"];
+    
     // clear out the notification, set it up again when a new Server entry is created later with initWithCoder
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                  name:kReachabilityChangedNotification
@@ -578,38 +594,50 @@
     self = [super init];
     if (self) {
         
-        _serverUUID = [aDecoder decodeObjectForKey:@"serverUUID"];
-        _dateCreated = [aDecoder decodeObjectForKey:@"dateCreated"];
+        _serverUUID = [aDecoder decodeObjectOfClass:[NSUUID class] forKey:@"serverUUID"];
+        _dateCreated = [aDecoder decodeObjectOfClass:[NSDate class] forKey:@"dateCreated"];
         
         _isConnected = NO;
         _stringFragment  = @"";
         
-        _logFile = [aDecoder decodeObjectForKey:@"logFile"];
+        _logFile = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"logFile"];
 
-        _model = [aDecoder decodeObjectForKey:@"model"];
-        _nameShort = [aDecoder decodeObjectForKey:@"nameShort"];
-        _address = [aDecoder decodeObjectForKey:@"address"];
+        _model = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"model"];
+        _nameShort = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"nameShort"];
+        _address = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"address"];
+
+        NSSet *classes = [NSSet setWithObjects:[NSMutableArray class]
+                                                ,[Command class]
+                                                ,[Source class]
+                                                ,[NSString class]
+                                                ,nil];
+        _privateSourceList = [aDecoder decodeObjectOfClasses:classes forKey:@"privateSourceList"];
+        _airplaySourceValue = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"airplaySourceValue"];
+        _tunerSourceValue = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"tunerSourceValue"];
+        _mainZoneSourceValue = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"mainZoneSourceValue"];
         
-        _privateSourceList = [aDecoder decodeObjectForKey:@"privateSourceList"];
-        _airplaySourceValue = [aDecoder decodeObjectForKey:@"airplaySourceValue"];
-        _tunerSourceValue = [aDecoder decodeObjectForKey:@"tunerSourceValue"];
-        _mainZoneSourceValue = [aDecoder decodeObjectForKey:@"mainZoneSourceValue"];
-        
-        _IP = [aDecoder decodeObjectForKey:@"IP"];
+        _IP = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"IP"];
         _port = [aDecoder decodeIntForKey:@"port"];
-        _lineTerminationString = [aDecoder decodeObjectForKey:@"lineTerminationString"];
+        _lineTerminationString = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"lineTerminationString"];
         _treatSpaceAsLineTermination = [aDecoder decodeBoolForKey:@"treatSpaceAsLineTermination"];
+        
+        _customIfString = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"customIfString"];
+        _customThenString = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"customThenString"];
         
         // Setup handling for a reachability change
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(reachabilityChanged:)
                                                      name:kReachabilityChangedNotification
                                                    object:nil];
-        
     }
     
     return self;
 
+}
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
 }
 
 @end

@@ -8,6 +8,8 @@
 
 #import "RemoteServerList.h"
 #import "RemoteServer.h"
+#import "Source.h"
+#import "SourceNAD.h"
 
 @interface RemoteServerList ()
 @property (nonatomic) NSMutableArray *privateServers;
@@ -40,9 +42,16 @@
     self = [super init];
     if (self) {
         
-        ///First try to retrieve saved items
-        NSString * path = [self archivePath];
-        _privateServers = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        // First try to retrieve saved items
+        NSError *error;
+        NSData *data = [[NSData alloc] initWithContentsOfFile:[self archivePath]];
+        NSSet *classes = [NSSet setWithObjects:[NSArray class]
+                          ,[RemoteServer class]
+                          ,[Source class]
+                          ,[SourceNAD class]
+                          ,[NSString class]
+                          ,nil];
+        _privateServers = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
         
         // If there are no saved items then start fresh
         if (!_privateServers) {
@@ -121,10 +130,9 @@
 
 - (BOOL)saveServers
 {
-    NSString *path = [self archivePath];
-    
-    return [NSKeyedArchiver archiveRootObject:self.privateServers
-                                       toFile:path];
+    NSError *error;
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:self.privateServers requiringSecureCoding:YES error:&error];
+    return [data writeToFile:[self archivePath] atomically:YES];
 }
 
 @end

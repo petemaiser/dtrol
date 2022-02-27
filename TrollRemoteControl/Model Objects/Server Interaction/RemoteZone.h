@@ -12,13 +12,17 @@
 @class Status;
 @class Command;
 
-@interface RemoteZone : RemoteComponent
+@interface RemoteZone : RemoteComponent <NSSecureCoding>
+
+@property (nonatomic, readonly, strong) NSUUID *zoneUUID;
+@property (nonatomic, strong) NSUUID *tunerOverrideZoneUUID;
 
 @property (nonatomic) Status *powerStatus;
 @property (nonatomic) Command *powerOnCommand;
 @property (nonatomic) Command *powerOffCommand;
 @property (nonatomic) NSString *customPostPowerOnString;
 @property (nonatomic) NSString *customPostPowerOffString;
+@property BOOL isHidden;
 
 @property BOOL isDynamicZoneCapable;
 @property BOOL isDynamicZone;

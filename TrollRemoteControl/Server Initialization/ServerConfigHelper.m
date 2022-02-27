@@ -10,7 +10,9 @@
 #import "ServerConfigHelper.h"
 #import "ServerSetupController.h"
 #import "RemoteServer.h"
+#import "RemoteServerList.h"
 #import "RemoteZone.h"
+#import "RemoteZoneList.h"
 #import "Command.h"
 #import "Source.h"
 #import "Log.h"
@@ -268,13 +270,13 @@
         NSArray *nameList = [[NSArray alloc] initWithObjects:@"Airplay", @"Air", @"AIRPLAY", @"air", nil];
         Source *source = [self sourceWithNameInArray:nameList];
         if (source) {
-            [self.serverSetupController postString:[NSString stringWithFormat:@"...Airplay source set to Source %@", source.value]
+            [self.serverSetupController postString:[NSString stringWithFormat:@"...Apps Auto-On Source set to Source %@", source.value]
                                                 to:PostStringDestinationFeedback];
             self.serverSetupController.server.airplaySourceValue = source.value;
         } else {
             if ([self.serverSetupController.server.sourceListAll count] > 0) {
                 Source *firstSource = self.serverSetupController.server.sourceList[0];
-                [self.serverSetupController postString:[NSString stringWithFormat:@"...Airplay source not found; will set to Source %@", firstSource.value]
+                [self.serverSetupController postString:[NSString stringWithFormat:@"...Airplay source not found; Apps Auto-On Source will be set to Source %@", firstSource.value]
                                                     to:PostStringDestinationFeedback];
                 self.serverSetupController.server.airplaySourceValue = firstSource.value;
             } else {
@@ -288,7 +290,7 @@
 {
     // See if we can identify one of the sources as the Tuner
     if (self.serverSetupController.server) {
-        NSArray *nameList = [[NSArray alloc] initWithObjects:@"Tuner", @"TUNER", @"tuner", nil];
+        NSArray *nameList = [[NSArray alloc] initWithObjects:@"Tuner", @"TUNER", @"tuner", @"Rack Tuner", nil];
         Source *source = [self sourceWithNameInArray:nameList];
         if (source) {
             [self.serverSetupController postString:[NSString stringWithFormat:@"...Tuner source set to Source %@", source.value]
@@ -316,22 +318,13 @@
         toValue = [baseVolume intValue];
     } else if ([baseVolume intValue] <= -60) {
         fromValue = -80;
-        toValue = -45;
-    } else if ([baseVolume intValue] <= -45) {
-        fromValue = -65;
-        toValue = -30;
+        toValue = -40;
     } else if ([baseVolume intValue] <= -30) {
-        fromValue = -50;
-        toValue = -15;
-    } else if ([baseVolume intValue] <= -15) {
         fromValue = -45;
-        toValue = 0;
-    } else if ([baseVolume intValue] <= 10) {
-        fromValue = -40;
-        toValue = 10;
+        toValue = -15;
     } else {
         fromValue = ([baseVolume intValue]-30);
-        toValue = ([baseVolume intValue]+20);
+        toValue = ([baseVolume intValue]+10);
     }
     
     [self setVolumeRangeForZone:zone fromValue:fromValue toValue:toValue];
@@ -428,6 +421,33 @@
     
     // Not found
     return nil;
+}
+
+- (RemoteZone *)getZoneWithServerIP:(NSString *)IP
+                    andZoneNameLong:(NSString  *)znl
+{
+    // First find the server
+    RemoteServer *server = nil;
+    NSArray *servers = [[RemoteServerList sharedList] servers];
+    for (RemoteServer *s in servers) {
+        if ([s.IP isEqualToString:IP]) {
+            server = s;
+            break;
+        }
+    }
+    
+    // Then the zone
+    RemoteZone *zone = nil;
+    NSArray *zones = [[RemoteZoneList sharedList] zones];
+    for (RemoteZone *z in zones) {
+        if ([z.nameLong isEqualToString:znl]) {
+            zone = z;
+            break;
+        }
+    }
+    
+    return zone;
+    
 }
 
 

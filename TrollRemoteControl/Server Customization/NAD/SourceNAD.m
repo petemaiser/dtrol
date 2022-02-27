@@ -30,10 +30,14 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        _prefix   = [aDecoder decodeObjectForKey:@"prefix"];
+        _prefix   = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"prefix"];
     }
     return self;
 }
 
++ (BOOL)supportsSecureCoding
+{
+    return YES;
+}
 
 @end

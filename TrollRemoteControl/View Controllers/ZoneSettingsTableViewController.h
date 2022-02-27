@@ -24,5 +24,5 @@
 @end
 
 #define volumeMin -80
-#define volumeMax 10
-#define volumeMinMaxRange 51
+#define volumeMax 20
+#define volumeMinMaxRange 60

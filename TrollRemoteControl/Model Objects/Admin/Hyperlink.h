@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Hyperlink : NSObject <NSCopying>
+@interface Hyperlink : NSObject <NSCopying, NSSecureCoding>
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *address;

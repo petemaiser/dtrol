@@ -42,10 +42,15 @@
 {
     self = [super init];
     if (self) {
-        _name = [aDecoder decodeObjectForKey:@"name"];
-        _address = [aDecoder decodeObjectForKey:@"address"];
+        _name = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"name"];
+        _address = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"address"];
     }
     return self;
+}
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
 }
 
 @end

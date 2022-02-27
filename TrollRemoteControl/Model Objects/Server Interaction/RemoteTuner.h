@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, TunerPresetType) {
 
 @class Status;
 
-@interface RemoteTuner : RemoteComponent
+@interface RemoteTuner : RemoteComponent <NSSecureCoding>
 
 @property (nonatomic) NSString *frequencyText;
 @property (nonatomic) NSString *presetText;

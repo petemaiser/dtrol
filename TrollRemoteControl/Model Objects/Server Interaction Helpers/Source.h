@@ -14,7 +14,7 @@
 @class Command;
 @class RemoteServer;
 
-@interface Source : NSObject <NSCopying>
+@interface Source : NSObject <NSCopying, NSSecureCoding>
 
 @property (nonatomic, copy) NSString *name;             // The display name of this particular source
 @property (nonatomic, copy) NSString *value;            // The "value" the processor uses for this particular source when reporting status
