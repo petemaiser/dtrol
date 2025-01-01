@@ -1,8 +1,17 @@
-This is the source code for “DTrol”, as available for iOS (iPhone and iPad).  This app was created by Peter James Maiser (Pete Maiser) in 2016, first published on the Apple App Store in 2017, and this source code was first published on GitHub in 2017.  Copyright (C) 2015 - 2022 Peter James Maiser.
+This is the source code for “DTrol”, as available for iOS (iPhone and iPad).  This app was created by Peter James Maiser (Pete Maiser) in 2016, first published on the Apple App Store in 2017, and this source code was first published on GitHub in 2017.  Copyright (C) 2015 - 2024 Peter James Maiser.
 
 This program comes with ABSOLUTELY NO WARRANTY.  See the included LICENSE file for detail on redistribution of this software.
 
 Release Updates:
+
+Release 1.4 (IN PROCESS for 2025)
+    - Enabled DTrol tuner presets for NAD (previously only supported on Anthem)
+    - Updated/Cleaned-up the initial-default list of linked Apps
+
+Release 1.3.1
+    - Updated privacy policy URL (1.3.1)
+    - Bug fix for display on iPad Pro 12.9" screens (1.3)
+    - Other small unnoticable changes (1.3)
 
 Release 1.2
     - Small changes to enhance usability and stability
@@ -11,11 +20,14 @@ Release 1.2
     - Added ability to hide zones (when Zone Setup buttons are hidden)
 
 Release 1.1
+    - Published source code on GitHub
     - Small changes to enhance stability
     - Corrected the initial default "Record Mode for Off" setting for 3rd and 4th zones 
     - Made it easier for programmers to extend this app to support other additional brands and models of processors and receivers
-    - Added limited support for Anthem processors prior to the AVM 60 (i.e. pre-MRX so the AVM 60 processor is NOT supported).  This app and its author have no affiliation with Anthem; the app is not endorsed by, supported by, or in any other way connected with Anthem
-    - Published source code on GitHub
+    - Added limited support for Anthem processors prior to the AVM 60 (i.e. pre-MRX so the AVM 60 processor is NOT supported).
+    - This app and its author have no affiliation with Anthem; the app is not endorsed by, supported by, or in any other way connected with Anthem
 
 Release 1.0
-    - Initial release on the Apple App Store, designed to support for NAD processors and receivers.  This app and its author have no affiliation with NAD Electronics, an International Division of Lenbrook Industries Limited (“NAD”).  This app is not endorsed by, supported by, or in any other way connected with NAD.
+    - Initial release on the Apple App Store, designed to support for NAD processors and receivers.
+    - This app and its author have no affiliation with NAD Electronics, an International Division of Lenbrook Industries Limited (“NAD”).
+    - This app is not endorsed by, supported by, or in any other way connected with NAD.

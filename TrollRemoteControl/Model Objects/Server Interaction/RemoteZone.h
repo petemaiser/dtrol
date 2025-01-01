@@ -16,6 +16,7 @@
 
 @property (nonatomic, readonly, strong) NSUUID *zoneUUID;
 @property (nonatomic, strong) NSUUID *tunerOverrideZoneUUID;
+@property (nonatomic, strong) NSMutableArray *dependentZoneUUIDList;
 
 @property (nonatomic) Status *powerStatus;
 @property (nonatomic) Command *powerOnCommand;

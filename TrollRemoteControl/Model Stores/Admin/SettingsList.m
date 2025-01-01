@@ -127,6 +127,18 @@
     
     hyperlink = nil;
     hyperlink = [[Hyperlink alloc] init];
+    hyperlink.name = @"BluOS";
+    hyperlink.address = @"bluesound://";
+    [hyperlinks addObject:hyperlink];
+    
+    hyperlink = nil;
+    hyperlink = [[Hyperlink alloc] init];
+    hyperlink.name = @"Apple Music";
+    hyperlink.address = @"music://";
+    [hyperlinks addObject:hyperlink];
+    
+    hyperlink = nil;
+    hyperlink = [[Hyperlink alloc] init];
     hyperlink.name = @"Remote";
     hyperlink.address = @"remote://";
     [hyperlinks addObject:hyperlink];
@@ -139,64 +151,10 @@
 
     hyperlink = nil;
     hyperlink = [[Hyperlink alloc] init];
-    hyperlink.name = @"Amazon Music";
-    hyperlink.address = @"amznmp3://";
-    [hyperlinks addObject:hyperlink];
-    
-    hyperlink = nil;
-    hyperlink = [[Hyperlink alloc] init];
-    hyperlink.name = @"Amazon Video";
-    hyperlink.address = @"aiv://";
-    [hyperlinks addObject:hyperlink];
-    
-    hyperlink = nil;
-    hyperlink = [[Hyperlink alloc] init];
-    hyperlink.name = @"Plex";
-    hyperlink.address = @"plexapp://";
-    [hyperlinks addObject:hyperlink];
-    
-    hyperlink = nil;
-    hyperlink = [[Hyperlink alloc] init];
-    hyperlink.name = @"Netflix";
-    hyperlink.address = @"nflx://";
-    [hyperlinks addObject:hyperlink];
-    
-    hyperlink = nil;
-    hyperlink = [[Hyperlink alloc] init];
-    hyperlink.name = @"Hulu";
-    hyperlink.address = @"hulu://";
-    [hyperlinks addObject:hyperlink];
-
-    hyperlink = nil;
-    hyperlink = [[Hyperlink alloc] init];
-    hyperlink.name = @"HBO Max";
-    hyperlink.address = @"hbomax://";
-    [hyperlinks addObject:hyperlink];
-    
-    hyperlink = nil;
-    hyperlink = [[Hyperlink alloc] init];
-    hyperlink.name = @"Spotify";
-    hyperlink.address = @"spotify://";
-    [hyperlinks addObject:hyperlink];
-    
-    hyperlink = nil;
-    hyperlink = [[Hyperlink alloc] init];
     hyperlink.name = @"iHeartRadio";
     hyperlink.address = @"iheartradio://";
     [hyperlinks addObject:hyperlink];
 
-    hyperlink = nil;
-    hyperlink = [[Hyperlink alloc] init];
-    hyperlink.name = @"iTunes";
-    hyperlink.address = @"itms://";
-    [hyperlinks addObject:hyperlink];
-    
-    hyperlink = nil;
-    hyperlink = [[Hyperlink alloc] init];
-    hyperlink.name = @"Videos";
-    hyperlink.address = @"videos://";
-    [hyperlinks addObject:hyperlink];
-    
     self.privateHyperlinks = hyperlinks;
 }
 

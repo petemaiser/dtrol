@@ -26,6 +26,7 @@
     if (self) {
         _zoneUUID = [[NSUUID alloc] init];
         self.tunerOverrideZoneUUID = nil;
+        self.dependentZoneUUIDList = [[NSMutableArray alloc] init];
         self.nameShort = @"Z?";
         self.nameLong = @"";
         self.customPostPowerOnString = @"";
@@ -109,6 +110,7 @@
     [aCoder encodeObject:self.zoneUUID forKey:@"zoneUUID"];
     [aCoder encodeObject:self.tunerOverrideZoneUUID forKey:@"tunerOverrideZoneUUID"];
     [aCoder encodeBool:self.isHidden forKey:@"isHidden"];
+    [aCoder encodeObject:self.dependentZoneUUIDList forKey:@"dependentZoneUUIDList"];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -155,6 +157,10 @@
         _zoneUUID = [aDecoder decodeObjectOfClass:[NSUUID class] forKey:@"zoneUUID"];
         self.tunerOverrideZoneUUID = [aDecoder decodeObjectOfClass:[NSUUID class] forKey:@"tunerOverrideZoneUUID"];
         self.isHidden = [aDecoder decodeBoolForKey:@"isHidden"];
+        NSSet *classes3 = [NSSet setWithObjects:[NSMutableArray class]
+                                                ,[NSUUID class]
+                                                ,nil];
+        self.dependentZoneUUIDList = [aDecoder decodeObjectOfClasses:classes3 forKey:@"dependentZoneUUIDList"];
     }
     
     return self;

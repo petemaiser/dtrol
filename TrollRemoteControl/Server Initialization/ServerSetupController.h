@@ -50,7 +50,7 @@ typedef NS_ENUM(NSInteger, ServerSetupStatusType) {
 // Demo Mode - fill-in placeholders if left empty
 #define DemoServerPort 4999
 #define DemoServerIdentifier @"TNR"
-#define DemoServerIPAddress @"192.168.30.50"
+#define DemoServerIPAddress @"192.168.7.90"
 
 // Notification Strings
 #define ServerFoundNotificationString @"ServerFound"

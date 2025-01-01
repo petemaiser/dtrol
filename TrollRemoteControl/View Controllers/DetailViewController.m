@@ -567,6 +567,15 @@ numberOfRowsInComponent:(NSInteger)component
         [tunerOverrideZone.powerOnCommand sendCommandToServer:tunerOverrideZone.server withPrefix:tunerOverrideZone.prefixValue];
     }
     
+    // Process any other zones this zone is dependent on
+    if ([self.remoteZone.dependentZoneUUIDList count] > 0) {
+        for (NSUUID *uuid in self.remoteZone.dependentZoneUUIDList) {
+            RemoteZone *dependentZone = [[RemoteZoneList sharedList] getZoneWithZoneUUID:uuid];
+            [dependentZone.powerOnCommand sendCommandToServer:dependentZone.server withPrefix:dependentZone.prefixValue];
+        }
+        
+    }
+    
     // Send the custom post-power-on string
     [self.remoteServer sendString:self.remoteZone.customPostPowerOnString];
     if (self.remoteZone.mustRequestStatus) {
@@ -602,16 +611,37 @@ numberOfRowsInComponent:(NSInteger)component
     
     // Process the Tuner Override Zone
     if (self.remoteZone.tunerOverrideZoneUUID) {
-        if (![self otherZonesUsingOverrideTuner]) {
-            RemoteZone *tunerOverrideZone = [[RemoteZoneList sharedList] getZoneWithZoneUUID:self.remoteZone.tunerOverrideZoneUUID];
-            [tunerOverrideZone.powerOffCommand sendCommandToServer:tunerOverrideZone.server withPrefix:tunerOverrideZone.prefixValue];
-        }
+        [self requestTunerOverrideZonePowerOff];
+    }
+    
+    // Process any other zones this zone is dependent on
+    if ([self.remoteZone.dependentZoneUUIDList count] > 0) {
+        [self requestDependentZonesPowerOff];
     }
     
     // Send the custom post-power-on string
     [self.remoteServer sendString:self.remoteZone.customPostPowerOffString];
     if (self.remoteZone.mustRequestStatus) {
         [self.remoteZone  sendRequestForStatus];
+    }
+}
+
+- (void)requestTunerOverrideZonePowerOff
+{
+    if (![self otherZonesUsingOverrideTuner:self.remoteZone.tunerOverrideZoneUUID]) {
+        RemoteZone *tunerOverrideZone = [[RemoteZoneList sharedList] getZoneWithZoneUUID:self.remoteZone.tunerOverrideZoneUUID];
+        [tunerOverrideZone.powerOffCommand sendCommandToServer:tunerOverrideZone.server withPrefix:tunerOverrideZone.prefixValue];
+    }
+}
+
+- (void)requestDependentZonesPowerOff
+{
+    for (NSUUID *uuid in self.remoteZone.dependentZoneUUIDList) {
+        if (![self otherZonesUsingOverrideZone:uuid]) {
+            RemoteZone *dependentZone = [[RemoteZoneList sharedList] getZoneWithZoneUUID:uuid];
+            [dependentZone.powerOffCommand  sendCommandToServer:dependentZone.server withPrefix:dependentZone.prefixValue];
+        }
+        
     }
 }
 
@@ -716,7 +746,7 @@ numberOfRowsInComponent:(NSInteger)component
 
 #pragma mark - Helpers
 
-- (BOOL)otherZonesUsingOverrideTuner
+- (BOOL)otherZonesUsingOverrideTuner:(NSUUID *)uuid
 {
     NSArray *zones = [[RemoteZoneList sharedList] zones];
     for (RemoteZone *z in zones) {
@@ -724,6 +754,25 @@ numberOfRowsInComponent:(NSInteger)component
             if (![z.zoneUUID.UUIDString isEqualToString:self.remoteZone.zoneUUID.UUIDString]){
                 if (z.powerStatus.state) {
                     return YES;
+                }
+            }
+        }
+    }
+    return NO;
+}
+
+- (BOOL)otherZonesUsingOverrideZone:(NSUUID *)uuid
+{
+    NSArray *zones = [[RemoteZoneList sharedList] zones];
+    for (RemoteZone *z in zones) {
+        if (![z.zoneUUID.UUIDString isEqualToString:self.remoteZone.zoneUUID.UUIDString]) {
+            if ([z.dependentZoneUUIDList count] > 0) {
+                for (NSUUID *zuuid in z.dependentZoneUUIDList) {
+                    if ([zuuid.UUIDString isEqualToString:uuid.UUIDString]) {
+                        if (z.powerStatus.state) {
+                            return YES;
+                        }
+                    }
                 }
             }
         }

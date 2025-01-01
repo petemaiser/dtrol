@@ -483,38 +483,71 @@
         if (self.zone1) {
             self.zone1.nameLong = [demoServer objectForKey:@"zone1.nameLong"];
             self.zone1.isHidden = [[demoServer objectForKey:@"zone1.isHidden"] boolValue];
+            
+            // Process any Tuner Overrides
+            NSString *tunerOverrideZoneIP = [demoServer objectForKey:@"zone1.tunerOverrideZone.IP"];
+            if (tunerOverrideZoneIP && ![tunerOverrideZoneIP isEqualToString:@""]) {
+                NSString *tunerOverrideZoneNameLong = [demoServer objectForKey:@"zone1.tunerOverrideZone.nameLong"];
+                RemoteZone *tunerOverrideZone =  [self getZoneWithServerIP:tunerOverrideZoneIP andZoneNameLong:tunerOverrideZoneNameLong];
+                self.zone1.tunerOverrideZoneUUID = tunerOverrideZone.zoneUUID;
+                
+                // Disable the local Tuner Source (it can always be reenbaled by the user if needed)
+                Source *s = self.sourceList[9]; s.enabled = @"N";
+            }
+            
+            // Process any Dependent Zones
+            NSString *dependentZoneOverrideIP = [demoServer objectForKey:@"zone1.dependentZone.IP"];
+            if (dependentZoneOverrideIP && ![dependentZoneOverrideIP isEqualToString:@""]) {
+                NSString *dependentZoneNameLong = [demoServer objectForKey:@"zone1.dependentZone.nameLong"];
+                RemoteZone *dependentZone =  [self getZoneWithServerIP:dependentZoneOverrideIP andZoneNameLong:dependentZoneNameLong];
+                [self.zone1.dependentZoneUUIDList addObject:dependentZone.zoneUUID];
+            }
         }
         if (self.zone2) {
             self.zone2.nameLong = [demoServer objectForKey:@"zone2.nameLong"];
             self.zone2.isHidden = [[demoServer objectForKey:@"zone2.isHidden"] boolValue];
+
+            // Process any Tuner Overrides
+            NSString *tunerOverrideZoneIP = [demoServer objectForKey:@"zone2.tunerOverrideZone.IP"];
+            if (tunerOverrideZoneIP && ![tunerOverrideZoneIP isEqualToString:@""]) {
+                NSString *tunerOverrideZoneNameLong = [demoServer objectForKey:@"zone2.tunerOverrideZone.nameLong"];
+                RemoteZone *tunerOverrideZone =  [self getZoneWithServerIP:tunerOverrideZoneIP andZoneNameLong:tunerOverrideZoneNameLong];
+                self.zone2.tunerOverrideZoneUUID = tunerOverrideZone.zoneUUID;
+                
+                // Disable the local Tuner Source (it can always be reenbaled by the user if needed)
+                Source *s = self.sourceList[9]; s.enabled = @"N";
+            }
+            
+            // Process any Dependent Zones
+            NSString *dependentZoneOverrideIP = [demoServer objectForKey:@"zone2.dependentZone.IP"];
+            if (dependentZoneOverrideIP && ![dependentZoneOverrideIP isEqualToString:@""]) {
+                NSString *dependentZoneNameLong = [demoServer objectForKey:@"zone2.dependentZone.nameLong"];
+                RemoteZone *dependentZone =  [self getZoneWithServerIP:dependentZoneOverrideIP andZoneNameLong:dependentZoneNameLong];
+                [self.zone2.dependentZoneUUIDList addObject:dependentZone.zoneUUID];
+            }
         }
         if (self.zone3) {
             self.zone3.nameLong = [demoServer objectForKey:@"zone3.nameLong"];
             self.zone3.isHidden = [[demoServer objectForKey:@"zone3.isHidden"] boolValue];
-        }
-        
-        NSString *tunerOverrideIP = [demoServer objectForKey:@"tunerOverride.IP"];
-        if (![tunerOverrideIP isEqualToString:@""]) {
             
-            // Disable the local Tuner Source
-            Source *s = self.sourceList[4]; s.enabled = @"N";
-            
-            // Fine the tuner zone
-            NSString *tunerOverrideZoneNameLong = [demoServer objectForKey:@"tunerOverride.zone.nameLong"];
-            RemoteZone *tunerZone =  [self getZoneWithServerIP:tunerOverrideIP andZoneNameLong:tunerOverrideZoneNameLong];
-            
-            // Set the tuner zone as a overide on all of this servers zones
-
-            if (self.zone1) {
-                self.zone1.tunerOverrideZoneUUID = tunerZone.zoneUUID;
-            }
-            if (self.zone2) {
-                self.zone2.tunerOverrideZoneUUID = tunerZone.zoneUUID;
-            }
-            if (self.zone3) {
-                self.zone3.tunerOverrideZoneUUID = tunerZone.zoneUUID;
+            // Process any Tuner Overrides
+            NSString *tunerOverrideZoneIP = [demoServer objectForKey:@"zone3.tunerOverrideZone.IP"];
+            if (tunerOverrideZoneIP && ![tunerOverrideZoneIP isEqualToString:@""]) {
+                NSString *tunerOverrideZoneNameLong = [demoServer objectForKey:@"zone3.tunerOverrideZone.nameLong"];
+                RemoteZone *tunerOverrideZone =  [self getZoneWithServerIP:tunerOverrideZoneIP andZoneNameLong:tunerOverrideZoneNameLong];
+                self.zone3.tunerOverrideZoneUUID = tunerOverrideZone.zoneUUID;
+                
+                // Disable the local Tuner Source (it can always be reenbaled by the user if needed)
+                Source *s = self.sourceList[9]; s.enabled = @"N";
             }
             
+            // Process any Dependent Zones
+            NSString *dependentZoneOverrideIP = [demoServer objectForKey:@"zone3.dependentZone.IP"];
+            if (dependentZoneOverrideIP && ![dependentZoneOverrideIP isEqualToString:@""]) {
+                NSString *dependentZoneNameLong = [demoServer objectForKey:@"zone3.dependentZone.nameLong"];
+                RemoteZone *dependentZone =  [self getZoneWithServerIP:dependentZoneOverrideIP andZoneNameLong:dependentZoneNameLong];
+                [self.zone3.dependentZoneUUIDList addObject:dependentZone.zoneUUID];
+            }
         }
         
         // Custom Source Settings (all of these can be changed on Zone Settings View)
