@@ -12,7 +12,7 @@
 
 @property BOOL showZoneSetupButtons;
 @property BOOL enableAutoPowerOnTuner;
-@property BOOL enableAutoPowerOnAirplay;
+@property BOOL enableAutoPowerOnApps;
 @property (readonly) NSTimeInterval timeout;    // Readonly for now...at some point make this a real setting
 
 - (instancetype)init;

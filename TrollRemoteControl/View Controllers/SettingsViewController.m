@@ -22,7 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UISwitch *showZoneSetupSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *tunerAutoOnSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *airplayAutoOnSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *airplayAutoOnSwitch;     // now usually called "Apps Auto-On" instead of "Airplay Auto-On"
 
 @property (weak, nonatomic) IBOutlet UIButton *hyperlinksEditButton;
 @property (weak, nonatomic) IBOutlet UITableView *hyperlinksTableView;
@@ -75,7 +75,7 @@
     if (settings) {
         [self.showZoneSetupSwitch setOn:settings.userPreferences.showZoneSetupButtons];
         [self.tunerAutoOnSwitch setOn:settings.userPreferences.enableAutoPowerOnTuner];
-        [self.airplayAutoOnSwitch setOn:settings.userPreferences.enableAutoPowerOnAirplay];
+        [self.airplayAutoOnSwitch setOn:settings.userPreferences.enableAutoPowerOnApps];
     }
 }
 
@@ -95,7 +95,7 @@
     if (settings) {
         // settings.userPreferences.showZoneSetupButtons can be skipped because it is already saved via showZoneSetupSwichChanged:
         settings.userPreferences.enableAutoPowerOnTuner = self.tunerAutoOnSwitch.isOn;
-        settings.userPreferences.enableAutoPowerOnAirplay = self.airplayAutoOnSwitch.isOn;
+        settings.userPreferences.enableAutoPowerOnApps = self.airplayAutoOnSwitch.isOn;
         saved = [settings saveSettings];
     }
     
