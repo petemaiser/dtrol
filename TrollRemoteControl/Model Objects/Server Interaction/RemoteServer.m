@@ -83,7 +83,7 @@
         self.logFile = @"";
         self.nameShort = @"";
         self.model = @"";
-        self.airplaySourceValue = @"";
+        self.autoOnSourceValue = @"";
         
         self.customIfString = @"";
         self.customThenString = @"";
@@ -569,7 +569,7 @@
     [aCoder encodeObject:self.address forKey:@"address"];
     
     [aCoder encodeObject:self.privateSourceList forKey:@"privateSourceList"];
-    [aCoder encodeObject:self.airplaySourceValue forKey:@"airplaySourceValue"];
+    [aCoder encodeObject:self.autoOnSourceValue forKey:@"autoOnSourceValue"];
     [aCoder encodeObject:self.tunerSourceValue forKey:@"tunerSourceValue"];
     [aCoder encodeObject:self.mainZoneSourceValue forKey:@"mainZoneSourceValue"];
     
@@ -612,7 +612,11 @@
                                                 ,[NSString class]
                                                 ,nil];
         _privateSourceList = [aDecoder decodeObjectOfClasses:classes forKey:@"privateSourceList"];
-        _airplaySourceValue = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"airplaySourceValue"];
+        _autoOnSourceValue = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"autoOnSourceValue"];
+        if (_autoOnSourceValue == nil) {
+            // backwards-compatibility
+            _autoOnSourceValue = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"airplaySourceValue"];
+        }
         _tunerSourceValue = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"tunerSourceValue"];
         _mainZoneSourceValue = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"mainZoneSourceValue"];
         

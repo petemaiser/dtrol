@@ -16,7 +16,7 @@
     if (self) {
         self.showZoneSetupButtons = YES;
         self.enableAutoPowerOnTuner = YES;
-        self.enableAutoPowerOnAirplay = YES;
+        self.enableAutoPowerOnApps = YES;
     }
     return self;
 }
@@ -30,7 +30,7 @@
 {
     [aCoder encodeBool:self.showZoneSetupButtons forKey:@"showZoneSetupButtons"];
     [aCoder encodeBool:self.enableAutoPowerOnTuner forKey:@"enableAutoPowerOnTuner"];
-    [aCoder encodeBool:self.enableAutoPowerOnAirplay forKey:@"enableAutoPowerOnAirplay"];
+    [aCoder encodeBool:self.enableAutoPowerOnApps forKey:@"enableAutoPowerOnApps"];
 }
 
 - (instancetype) initWithCoder:( NSCoder *) aDecoder
@@ -39,7 +39,7 @@
     if (self) {
         _showZoneSetupButtons = [aDecoder decodeBoolForKey:@"showZoneSetupButtons"];
         _enableAutoPowerOnTuner = [aDecoder decodeBoolForKey:@"enableAutoPowerOnTuner"];
-        _enableAutoPowerOnAirplay = [aDecoder decodeBoolForKey:@"enableAutoPowerOnTuner"];
+        _enableAutoPowerOnApps = [aDecoder decodeBoolForKey:@"enableAutoPowerOnApps"];
     }
     return self;
 }

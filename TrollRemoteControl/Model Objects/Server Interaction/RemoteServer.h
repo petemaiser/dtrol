@@ -32,7 +32,7 @@
 @property (nonatomic, readonly) NSArray *sourceListAll;
 @property (nonatomic) NSString *tunerSourceValue;
 @property (nonatomic) NSString *mainZoneSourceValue;
-@property (nonatomic) NSString *airplaySourceValue;
+@property (nonatomic) NSString *autoOnSourceValue;
 - (void)addSource:(Source *)source;
 
 @property (nonatomic) NSString *customIfString;             // Monitor for this string as an "If".  Execute "Then" string when "If" is observed.

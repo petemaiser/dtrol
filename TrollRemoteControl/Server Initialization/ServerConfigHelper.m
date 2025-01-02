@@ -159,8 +159,8 @@
         [self processDemoMode:self.demoMode];
     }
     
-    // Set the Airplay Source
-    [self setAirplaySource];
+    // Set the Apps Auto-On Source
+    [self setAutoOnSource];
     
     // Set the Tuner Source
     [self setTunerSource];
@@ -263,24 +263,24 @@
 
 #pragma mark - Helpers to set source markers
 
-- (void)setAirplaySource
+- (void)setAutoOnSource
 {
-    // See if we can identify one of the sources as "Airplay"
+    // See if we can identify one of the sources as "Airplay" for Apps Auto-On
     if (self.serverSetupController.server) {
         NSArray *nameList = [[NSArray alloc] initWithObjects:@"Airplay", @"Air", @"AIRPLAY", @"air", nil];
         Source *source = [self sourceWithNameInArray:nameList];
         if (source) {
             [self.serverSetupController postString:[NSString stringWithFormat:@"...Apps Auto-On Source set to Source %@", source.value]
                                                 to:PostStringDestinationFeedback];
-            self.serverSetupController.server.airplaySourceValue = source.value;
+            self.serverSetupController.server.autoOnSourceValue = source.value;
         } else {
             if ([self.serverSetupController.server.sourceListAll count] > 0) {
                 Source *firstSource = self.serverSetupController.server.sourceList[0];
                 [self.serverSetupController postString:[NSString stringWithFormat:@"...Airplay source not found; Apps Auto-On Source will be set to Source %@", firstSource.value]
                                                     to:PostStringDestinationFeedback];
-                self.serverSetupController.server.airplaySourceValue = firstSource.value;
+                self.serverSetupController.server.autoOnSourceValue = firstSource.value;
             } else {
-                self.serverSetupController.server.airplaySourceValue = @"";
+                self.serverSetupController.server.autoOnSourceValue = @"";
             }
         }
     }

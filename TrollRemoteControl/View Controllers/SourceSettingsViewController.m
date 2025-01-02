@@ -20,7 +20,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *warningLabel;
 @property (weak, nonatomic) IBOutlet UITableView *sourcesTableView;
-@property (weak, nonatomic) IBOutlet UIPickerView *airplayAutoOnSourcePicker;
+@property (weak, nonatomic) IBOutlet UIPickerView *airplayAutoOnSourcePicker;   // now usually called "Apps Auto-On" instead of "Airplay Auto-On"
 
 @end
 
@@ -153,7 +153,7 @@ numberOfRowsInComponent:(NSInteger)component
        inComponent:(NSInteger)component
 {
     Source *s = self.remoteZone.server.sourceListAll[row];
-    self.remoteZone.server.airplaySourceValue = s.value;
+    self.remoteZone.server.autoOnSourceValue = s.value;
 }
 
 - (void)resetPickerView:(UIPickerView *)pickerView
@@ -162,7 +162,7 @@ numberOfRowsInComponent:(NSInteger)component
     if (pickerView == self.airplayAutoOnSourcePicker) {
         for (NSInteger i = 0; i < [self.remoteZone.server.sourceListAll count]; i++) {
             Source *s = self.remoteZone.server.sourceListAll[i];
-            if ([s.value isEqual:self.remoteZone.server.airplaySourceValue]) {
+            if ([s.value isEqual:self.remoteZone.server.autoOnSourceValue]) {
                 [self.airplayAutoOnSourcePicker selectRow:i
                                               inComponent:0
                                                  animated:animated];
@@ -251,12 +251,12 @@ numberOfRowsInComponent:(NSInteger)component
         else {
             s.enabled = @"No";
             
-            // Check on if we just disabled the Airplay Source, and if so pick another enabled source
-            if ([s.value isEqual:self.remoteZone.server.airplaySourceValue]) {
+            // Check on if we just disabled the Apps Auto-On Source (fka Airplay Source), and if so pick another enabled source
+            if ([s.value isEqual:self.remoteZone.server.autoOnSourceValue]) {
                 for (NSInteger i = 0; i < [self.remoteZone.server.sourceListAll count]; i++) {
                     Source *candidate = self.remoteZone.server.sourceListAll[i];
                     if (candidate.enabled.boolValue) {
-                        self.remoteZone.server.airplaySourceValue = candidate.value;
+                        self.remoteZone.server.autoOnSourceValue = candidate.value;
                         [self resetPickerView:self.airplayAutoOnSourcePicker animated:YES];
                         break;
                     }

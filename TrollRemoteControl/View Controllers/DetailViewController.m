@@ -441,7 +441,7 @@
         if (self.userPreferences.enableAutoPowerOnTuner) {
             self.presetUpButton.backgroundColor = [UIColor colorWithRed:0 green:1 blue:0 alpha:1];
         }
-        if (self.userPreferences.enableAutoPowerOnAirplay) {
+        if (self.userPreferences.enableAutoPowerOnApps) {
             self.linkButton.backgroundColor = [UIColor colorWithRed:0 green:1 blue:0 alpha:1];
         }
     }
@@ -717,13 +717,13 @@ numberOfRowsInComponent:(NSInteger)component
 - (IBAction)linkGo:(id)sender
 {
     if ((!self.remoteZone.powerStatus.state) &&
-        (self.userPreferences.enableAutoPowerOnAirplay)) {
+        (self.userPreferences.enableAutoPowerOnApps)) {
         
         [self turnPowerOn];
 
         for (NSInteger i = 0; i < [self.remoteZone.sourceList count]; i++) {
             Source *source = self.remoteZone.sourceList[i];
-            if ([source.value isEqual:self.remoteServer.airplaySourceValue]) {
+            if ([source.value isEqual:self.remoteServer.autoOnSourceValue]) {
                 [source sendSourceCommandToServer:self.remoteServer withPrefix:self.remoteZone.prefixValue];
                 break;
             }
