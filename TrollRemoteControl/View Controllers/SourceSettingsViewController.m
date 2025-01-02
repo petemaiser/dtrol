@@ -80,20 +80,10 @@
     cell.sourceNameTextField.tag = indexPath.row;
     [cell.sourceEnabledSwitch setOn:s.enabled.boolValue];
     cell.sourceEnabledSwitch.tag = indexPath.row;
-    
-    // If this is the tuner source, don't make it disable-able.
-    // Tuner functions are a key part this app; not wanting a Tuner is unlikely and not supported at this time
-    if ( ([s.value isEqual:self.remoteZone.server.tunerSourceValue]) &&
-         (s.enabled.boolValue) ) {
-        [cell.sourceLabel setEnabled:NO];
-        [cell.sourceNameTextField setEnabled:NO];
-        [cell.sourceEnabledSwitch setEnabled:NO];
-    } else {
-        [cell.sourceLabel setEnabled:YES];
-        [cell.sourceNameTextField setEnabled:YES];
-        [cell.sourceEnabledSwitch setEnabled:YES];
-    }
-    
+    [cell.sourceLabel setEnabled:YES];
+    [cell.sourceNameTextField setEnabled:YES];
+    [cell.sourceEnabledSwitch setEnabled:YES];
+
     return cell;
 }
 
@@ -242,11 +232,6 @@ numberOfRowsInComponent:(NSInteger)component
         Source *s = self.remoteZone.server.sourceListAll[sourceSwitch.tag];
         if (sourceSwitch.isOn) {
             s.enabled = @"Yes";
-            
-            // Check on if we just enabled the Tuner source, and if so prevent it from being disabled
-            if ( [s.value isEqual:self.remoteZone.server.tunerSourceValue]) {
-                [sourceSwitch setEnabled:NO];
-            }
         }
         else {
             s.enabled = @"No";
@@ -262,7 +247,24 @@ numberOfRowsInComponent:(NSInteger)component
                     }
                 }
             }
-            
+    
+            // Check on if we just disabled the last enabled Source, and if so
+            // re enable the first source so the app doesn't crash later
+            bool allSourcesDisabled = true;
+            for (NSInteger i = 0; i < [self.remoteZone.server.sourceListAll count]; i++) {
+                Source *check = self.remoteZone.server.sourceListAll[i];
+                if (check.enabled.boolValue) {
+                    allSourcesDisabled = false;
+                    break;
+                }
+            }
+            if (allSourcesDisabled) {
+                Source *first = self.remoteZone.server.sourceListAll[0];
+                first.enabled = @"Yes";
+                self.remoteZone.server.autoOnSourceValue = first.value;
+                [self resetPickerView:self.airplayAutoOnSourcePicker animated:YES];
+                [self.sourcesTableView reloadData];
+            }
         }
         [self.masterViewController reloadTable];
     }
