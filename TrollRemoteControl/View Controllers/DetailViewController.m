@@ -179,7 +179,16 @@
             self.navigationItem.rightBarButtonItem = settingsButton;
             
         }
-    
+        
+        // FUTURE enable tuner controls to be hidden https://github.com/petemaiser/dtrol/issues/9
+        // FUTURE Hide tuner controls if tuner source is disabled
+//        if (!self.remoteZone.tunerOverrideZoneUUID)
+//            and the remoteServerZone Source with
+//            self.remoteZone.server.tunerSourceValue
+//            is
+//            enabled == false
+//            then hide the Tuner fields
+           
         if (self.remoteZone.muteStatus)     // Hide indicator if it is not relevant
         {
             self.muteSwitch.hidden = NO;
