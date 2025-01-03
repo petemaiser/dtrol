@@ -601,9 +601,9 @@ numberOfRowsInComponent:(NSInteger)component
         Command *command = self.remoteZone.modeRecordCommand;
         [command sendCommandToServer:self.remoteServer withPrefix:self.remoteZone.prefixValue];
 
-        // Also set it to copy-main source.  This is effectively what "record" is...and so setting the source to copy-main will represent status
-        // better in status displays
-                for (NSInteger i = 0; i < [self.remoteZone.sourceList count]; i++) {
+        // Also set thse Zone to the copy-main source.  This is effectively what "record" is...and so setting the source to copy-main
+        // will make more sence to the user in status displays
+        for (NSInteger i = 0; i < [self.remoteZone.sourceList count]; i++) {
             Source *source = self.remoteZone.sourceList[i];
             if ([source.value isEqual:self.remoteServer.mainZoneSourceValue]) {
                 [source sendSourceCommandToServer:self.remoteServer withPrefix:self.remoteZone.prefixValue];

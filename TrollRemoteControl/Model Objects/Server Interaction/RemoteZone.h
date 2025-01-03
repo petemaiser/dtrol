@@ -25,6 +25,7 @@
 @property (nonatomic) NSString *customPostPowerOffString;
 @property BOOL isHidden;
 
+@property BOOL isMainZone;
 @property BOOL isDynamicZoneCapable;
 @property BOOL isDynamicZone;
 @property (nonatomic) Status *modeStatus;

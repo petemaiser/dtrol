@@ -32,6 +32,7 @@
         self.customPostPowerOnString = @"";
         self.customPostPowerOffString = @"";
         self.isHidden = NO;
+        self.isMainZone = NO;
         self.isDynamicZoneCapable = NO;
         self.isDynamicZone = NO;
         self.volumeCommandTemplate = nil;
@@ -61,11 +62,20 @@
 
 - (NSArray *)sourceList
 {
-    //Override the getter of the array to return a copy of the remote server sources, with any zone-specific sources added
+    //Override the getter of the array to return a copy of the remote server sources,
+    // remove the "Copy Main" source if this is the main zone,
+    // and add any zone-specific sources that exist
     NSMutableArray *sourceList = nil;
     
     if (self.server.sourceList) {
         sourceList = [[NSMutableArray alloc] initWithArray:self.server.sourceList];
+        if (self.isMainZone) {
+            for (Source *s in sourceList) {
+                if ([s.value isEqual:self.server.mainZoneSourceValue]) {
+                    [sourceList removeObject:s];
+                }
+            }
+        }
         for (Source *s in self.zoneSourceList) {
             [sourceList addObject:s];
         }
@@ -95,6 +105,7 @@
     [aCoder encodeObject:self.modeStatus forKey:@"modeStatus"];
     [aCoder encodeObject:self.modeZoneCommand forKey:@"modeZoneCommand"];
     [aCoder encodeObject:self.modeRecordCommand forKey:@"modeRecordCommand"];
+    [aCoder encodeBool:self.isMainZone forKey:@"isMainZone"];
     [aCoder encodeBool:self.isDynamicZoneCapable forKey:@"isDynamicZoneCapable"];
     [aCoder encodeBool:self.isDynamicZone forKey:@"isDynamicZone"];
     [aCoder encodeObject:self.volumeControlFixed forKey:@"volumeControlFixed"];
@@ -129,6 +140,8 @@
         self.modeZoneCommand =  [aDecoder decodeObjectOfClass:[Command class] forKey:@"modeZoneCommand"];
         self.modeRecordCommand =  [aDecoder decodeObjectOfClass:[Command class] forKey:@"modeRecordCommand"];
         
+        self.isMainZone = [aDecoder decodeBoolForKey:@"isMainZone"];
+                
         self.isDynamicZoneCapable = [aDecoder decodeBoolForKey:@"isDynamicZoneCapable"];
         self.isDynamicZone = [aDecoder decodeBoolForKey:@"isDynamicZone"];
         

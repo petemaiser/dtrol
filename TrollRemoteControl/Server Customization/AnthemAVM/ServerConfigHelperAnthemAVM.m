@@ -250,8 +250,16 @@
                                         to:PostStringDestinationLog|PostStringDestinationFeedback];
     
     // Create a Source "c" for the "Copy Main" Source
-    Command *c = [[Command alloc] initWithVariable:@"S" parameterPrefix:@"" parameter:@"M"];
-    Source *copyMainSource = [[Source alloc] initWithName:@"Copy Main" variable:@"S" value:@"M" sourceCommand:c enabled:@"Yes"];
+    // add it to the Server
+    Command *c = [[Command alloc] initWithVariable:@"S"
+                                   parameterPrefix:@""
+                                         parameter:@"M"];
+    Source *copyMainSource = [[Source alloc] initWithName:@"Copy Main"
+                                                 variable:@"S"
+                                                    value:@"M"
+                                            sourceCommand:c
+                                                  enabled:@"Yes"];
+    [self.server addSource:copyMainSource];
     
     // Process and load Local Preset Information
     self.tuner.stations = [[NSMutableArray alloc] init];
@@ -283,6 +291,7 @@
         [[RemoteTunerList sharedList] addTuner:self.tuner];
     }
     if (self.zone1) {
+        self.zone1.isMainZone = YES;
         self.zone1.nameShort = [NSString stringWithFormat:@"%@ %@", self.server.nameShort, self.zone1.prefixValue];
         if ([self.zone1.nameLong isEqualToString:@""])
             self.zone1.nameLong = [NSString stringWithFormat:@"%@ %@ %@", self.server.nameShort, self.server.model, self.zone1.prefixValue];
@@ -293,7 +302,7 @@
         self.zone2.nameShort = [NSString stringWithFormat:@"%@ Z2", self.server.nameShort];
         if ([self.zone2.nameLong isEqualToString:@""])
             self.zone2.nameLong = [NSString stringWithFormat:@"%@ %@ %@", self.server.nameShort, self.server.model, self.zone2.prefixValue];
-        [self.zone2 addZoneSource:copyMainSource];
+//        [self.zone2 addZoneSource:copyMainSource];
         [self.zone2 setServerAsUUID:self.server.serverUUID];
         [[RemoteZoneList sharedList] addZone:self.zone2];
     }
@@ -301,7 +310,7 @@
         self.zone3.nameShort = [NSString stringWithFormat:@"%@ Z3", self.server.nameShort];
         if ([self.zone3.nameLong isEqualToString:@""])
             self.zone3.nameLong = [NSString stringWithFormat:@"%@ %@ %@", self.server.nameShort, self.server.model, self.zone3.prefixValue];
-        [self.zone3 addZoneSource:copyMainSource];
+//        [self.zone3 addZoneSource:copyMainSource];
         [self.zone3 setServerAsUUID:self.server.serverUUID];
         [[RemoteZoneList sharedList] addZone:self.zone3];
     }
@@ -316,7 +325,10 @@
 - (void)setMainZoneSource
 {
     // Subclasses need to override this method to complete settings on the min and max volume ranges
-    self.server.mainZoneSourceValue = @"c";
+    
+    // In this generation of Anthem components, source "M" is the "Copy Main" Source
+    // and that is what we setup as the "Copy Main" Zone in configureRemoteComponents
+    self.server.mainZoneSourceValue = @"M";
 }
 
 - (void)setVolumeSettings

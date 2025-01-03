@@ -221,15 +221,17 @@
     
     
     // Create "Source 11", which seems to always be the "Copy Main" Source on NAD
-    // Add it to appropriate sources below
+    // add it to the Server
     Command *c = [[Command alloc] initWithVariable:@".Source"
-                                parameterPrefix:@"="
-                                      parameter:@"11"];
+                                   parameterPrefix:@"="
+                                         parameter:@"11"];
     Source *copyMainSource = [[Source alloc] initWithName:@"Copy Main"
                                                  variable:@"Source"
                                                     value:@"11"
                                             sourceCommand:c
                                                   enabled:@"Yes"];
+    [self.server addSource:copyMainSource];
+    
     // Process and load our Components
     if (self.tuner) {
         self.tuner.nameShort = [NSString stringWithFormat:@"%@ Tuner", self.server.nameShort];
@@ -238,6 +240,7 @@
         [[RemoteTunerList sharedList] addTuner:self.tuner];
     }
     if (self.zone1) {
+        self.zone1.isMainZone = YES;
         self.zone1.nameShort = [NSString stringWithFormat:@"%@ %@", self.server.nameShort, self.zone1.prefixValue];
         if ([self.zone1.nameLong isEqualToString:@""])
             self.zone1.nameLong = [NSString stringWithFormat:@"%@ %@ %@", self.server.nameShort, self.server.model, self.zone1.prefixValue];
@@ -248,7 +251,7 @@
         self.zone2.nameShort = [NSString stringWithFormat:@"%@ Z2", self.server.nameShort];
         if ([self.zone2.nameLong isEqualToString:@""])
             self.zone2.nameLong = [NSString stringWithFormat:@"%@ %@ %@", self.server.nameShort, self.server.model, self.zone2.prefixValue];
-        [self.zone2 addZoneSource:copyMainSource];
+ //       [self.zone2 addZoneSource:copyMainSource];
         [self.zone2 setServerAsUUID:self.server.serverUUID];
         [[RemoteZoneList sharedList] addZone:self.zone2];
     }
@@ -256,7 +259,7 @@
         self.zone3.nameShort = [NSString stringWithFormat:@"%@ Z3", self.server.nameShort];
         if ([self.zone3.nameLong isEqualToString:@""])
             self.zone3.nameLong = [NSString stringWithFormat:@"%@ %@ %@", self.server.nameShort, self.server.model, self.zone3.prefixValue];
-        [self.zone3 addZoneSource:copyMainSource];
+//        [self.zone3 addZoneSource:copyMainSource];
         [self.zone3 setServerAsUUID:self.server.serverUUID];
         [[RemoteZoneList sharedList] addZone:self.zone3];
     }
@@ -264,7 +267,7 @@
         self.zone4.nameShort = [NSString stringWithFormat:@"%@ Z4", self.server.nameShort];
         if ([self.zone4.nameLong isEqualToString:@""])
             self.zone4.nameLong = [NSString stringWithFormat:@"%@ %@ %@", self.server.nameShort, self.server.model, self.zone4.prefixValue];
-        [self.zone4 addZoneSource:copyMainSource];
+//        [self.zone4 addZoneSource:copyMainSource];
         [self.zone4 setServerAsUUID:self.server.serverUUID];
         [[RemoteZoneList sharedList] addZone:self.zone4];
     }
@@ -278,6 +281,8 @@
 - (void)setMainZoneSource
 {
     // Subclasses of ServerSettingsHelper need to implement this to complete settings on the min and max volume ranges
+    
+    // We added "Source 11" as the "Copy Main" Zone in configureRemoteComponents
     self.server.mainZoneSourceValue = @"11";
 }
 
